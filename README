@@ -1,0 +1,42 @@
+Kinect Management Server
+
+The Kinect Management Server (KMS) is a service for the "Pursuit" game that detects and manages up to four 
+players using two Microsoft Kinect sensors via Annonymous Pipes.
+
+Design:
+The KMS is composed of four modules:
+	- The main KinectManagementServer
+	- The KinectClient
+	- The GestureModule
+	- The SocketServer
+
+Kinect Management Server:
+This is the entry point for the service. During initialization, the KMS searches for all Kinects connected to the 
+system via USB. For each Kinect found, the service will spawn a Kinect Client that will manage that Kinect. The 
+KMS will also create a GestureModule for detecting and reporting player poses and gestures. Finally, the KMS connects 
+to a Unity game instance via the Socket Server component.
+
+Kinect Client:
+The Kinect Client is responsible for starting and managing one Kinect sensor. After starting the sensor, the Kinect Client 
+streams live skeleton data to the KMS by means of Interprocess Communication. Right now, the Kinect Client can stream to 
+the server via Annomymous Pipes or TCP sockets.
+
+Gesture Module:
+The Gesture Module is responsible for analysing the skeleton data received from the Kinect Clients and determining whether 
+a pose or gesture has been executed by a player. The Gesture Module will then post these events to the KMS for transmittal 
+to the Unity game via the Socket Server.
+
+Socket Server:
+The Socket Server is responsible for gathering the pose and gesture events, parsing them to a JSON string, which is then 
+streamed via a socket to an instance of the Unity game. The Unity game can then act appropriately on these events.
+
+
+Changelog:
+
+02/17/2012: Daniel Kennedy
+	- Created the solution for the KMS
+	- Added projects for the four modules
+	- Finished documenting the Kinect Client and organised the code
+	- Updated the README with the general design for the KMS
+	- Configured the GIT repository settings (gitignore)
+
