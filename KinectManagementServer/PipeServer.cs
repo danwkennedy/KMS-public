@@ -18,7 +18,7 @@ namespace KinectManagementServer
         private string clientProcess;
         private string kinectId;
 
-        private ISynchronizeInvoke invoke;
+        //private ISynchronizeInvoke invoke;
         private KinectManagementServer.UpdateSkeletons update;
         private KinectManagementServer.UpdateSkeletons empty;
 

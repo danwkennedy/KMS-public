@@ -9,6 +9,13 @@ using System.Runtime.CompilerServices;
 
 namespace KinectManagementServer
 {
+    /// <summary>
+    /// Controls the main thread for the KMS.
+    /// This class will run the main thread of the KMS. It will 
+    /// spawn a new thread for each Kinect sensor found on the USB 
+    /// bus as well as a gesture thread for each sensor. This class 
+    /// will also be responsible for assigning players to skeletons.
+    /// </summary>
     class KinectManagementServer
     {
 
@@ -21,15 +28,28 @@ namespace KinectManagementServer
 
         #region Vars
 
+        /// <summary>
+        /// A List of all the threads running Kinect PipeServers 
+        /// </summary>
         private List<Thread> kinectPipes;
+
+        /// <summary>
+        /// A list of all the threads running Gesture Modules
+        /// </summary>
         private List<Thread> gestures;
 
+        /// <summary>
+        /// A dictionary mapping the KinectId (string) and the SkeletonId (int) to a player
+        /// </summary>
         private Dictionary<string, Dictionary<int, Player>> players;
 
         #endregion
 
         #region Init
 
+        /// <summary>
+        /// Initializes all the components in the correct order (order matters here)
+        /// </summary>
         void InitializeComponents()
         {
             InitKinectClients();
@@ -77,12 +97,18 @@ namespace KinectManagementServer
 
         #endregion
 
+        /// <summary>
+        /// Empty constructor.
+        /// </summary>
         public KinectManagementServer()
         {
             kinectPipes = new List<Thread>();
             players = new Dictionary<string, Dictionary<int, Player>>();
         }
 
+        /// <summary>
+        /// Runs the KMS
+        /// </summary>
         public void Run()
         {
             InitializeComponents();
@@ -95,6 +121,10 @@ namespace KinectManagementServer
 
         #region Pipe Event Handling
 
+        /// <summary>
+        /// Receives a List of Skeletons and organizes the data into Players
+        /// </summary>
+        /// <param name="e">The event arguments holding the KinectId and List of Skeletons</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void SkeletonUpdate(SkeletonUpdateArgs e)
         {
@@ -117,6 +147,12 @@ namespace KinectManagementServer
             }
         }
 
+        /// <summary>
+        /// If no tracked Skeletons are found in the current SkeletonFrame, this method 
+        /// will be called to ensure that all Skeletons associated with the Frame's KinectId 
+        /// are removed.
+        /// </summary>
+        /// <param name="e">The event arguments holding the KinectId (no need for Skeleton data)</param>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void NoSkeletons(SkeletonUpdateArgs e)
         {
@@ -128,11 +164,20 @@ namespace KinectManagementServer
 
         #region Player Management
 
+        /// <summary>
+        /// Adds a given player to the Player list according to the Player's KinectId and 
+        /// Skeleton TrackingId
+        /// </summary>
+        /// <param name="p">The Player to add to the List of Players</param>
         private void AddPlayer(Player p)
         {
             players[p.KinectId][p.Skeleton.TrackingId] = p;
         }
 
+        /// <summary>
+        /// Removes all players from the list associated with the given KinectId
+        /// </summary>
+        /// <param name="KID">The KinectId or list to remove</param>
         private void RemovePlayerList(string KID)
         {
             int[] keys = players[KID].Keys.ToArray<int>();
