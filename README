@@ -40,3 +40,8 @@ Changelog:
 	- Updated the README with the general design for the KMS
 	- Configured the GIT repository settings (gitignore)
 
+02/19/2012: Daniel Kennedy
+	- Started preliminary design. Will use a Scheduler design pattern
+	- Implemented inter-thread communication between the pipe threads and the main thread
+	- Some cleanup and commenting
+
