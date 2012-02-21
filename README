@@ -45,3 +45,6 @@ Changelog:
 	- Implemented inter-thread communication between the pipe threads and the main thread
 	- Some cleanup and commenting
 
+02/20/2012: Yuxin Ma
+	- Added GestureModule related classes
+
