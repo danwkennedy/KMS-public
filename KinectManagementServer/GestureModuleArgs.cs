@@ -13,6 +13,9 @@ namespace KinectManagementServer
             players = _players;
         }
 
+
+        #region Getters/Setters
+
         public List<Player> Players
         {
             get
@@ -26,5 +29,7 @@ namespace KinectManagementServer
              *     this.players = value;
              * }*/
         }
+
+        #endregion
     }
 }

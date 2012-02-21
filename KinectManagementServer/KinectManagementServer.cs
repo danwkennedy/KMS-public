@@ -6,6 +6,7 @@ using Microsoft.Kinect;
 using System.Threading;
 using System.Runtime.Remoting.Contexts;
 using System.Runtime.CompilerServices;
+using GestureModule;
 
 namespace KinectManagementServer
 {
@@ -26,7 +27,7 @@ namespace KinectManagementServer
         /// <param name="e">The update args with the KinectId associated with the calling thread and a List of Skeletons to update</param>
         public delegate void UpdateSkeletons(SkeletonUpdateArgs e);
 
-        public delegate void OnCompleted();
+        public delegate void OnCompleted(GestureModuleArgs e);
 
         #region Vars
 
@@ -44,6 +45,9 @@ namespace KinectManagementServer
         /// A dictionary mapping the KinectId (string) and the SkeletonId (int) to a player
         /// </summary>
         private Dictionary<string, Dictionary<int, Player>> players;
+
+        private int gestureCount = 0;
+        private List<string> events;
 
         #endregion
 
@@ -106,6 +110,7 @@ namespace KinectManagementServer
         {
             kinectPipes = new List<Thread>();
             players = new Dictionary<string, Dictionary<int, Player>>();
+            events = new List<string>();
         }
 
         /// <summary>
@@ -165,9 +170,22 @@ namespace KinectManagementServer
 
         #region Gesture Event Handling
 
-        public void OnCompleted()
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public void OnCompleted(GestureCompletedArgs e)
         {
+            events.AddRange(e.Skeletons);
 
+            gestureCount++;
+
+            if (gestureCount == kinectPipes.Count)
+            {
+                foreach (string s in events)
+                {
+                    Console.WriteLine("[Event] " + s);
+                }
+
+                events.RemoveRange(0, events.Count);
+            }
         }
 
         #endregion
