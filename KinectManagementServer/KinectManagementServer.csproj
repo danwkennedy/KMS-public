@@ -50,7 +50,16 @@
     <Compile Include="Player.cs" />
     <Compile Include="Runner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SkeletonUpdateArgs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibrary1\Utils.csproj">
+      <Project>{4CAF265E-49B8-4911-97DD-9FB36ABB0FE3}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GestureModule\GestureModule.csproj">
+      <Project>{5DA17A6D-2594-411D-8F36-6A0685A7E716}</Project>
+      <Name>GestureModule</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

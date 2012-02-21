@@ -7,6 +7,7 @@ using System.Threading;
 using System.Runtime.Remoting.Contexts;
 using System.Runtime.CompilerServices;
 using GestureModule;
+using Utils;
 
 namespace KinectManagementServer
 {
@@ -142,6 +143,7 @@ namespace KinectManagementServer
                 try
                 {
                     Player p = players[e.KinectId][skeleton.TrackingId];
+                    p.Skeleton = skeleton;
                 }
                 catch (KeyNotFoundException e1)
                 {
@@ -152,6 +154,8 @@ namespace KinectManagementServer
                     }
                 }
             }
+
+            // Call to gesture module
         }
 
         /// <summary>
@@ -171,9 +175,9 @@ namespace KinectManagementServer
         #region Gesture Event Handling
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public void OnCompleted(GestureCompletedArgs e)
+        public void OnGestureCompleted(GestureCompletedArgs e)
         {
-            events.AddRange(e.Skeletons);
+            events.AddRange(e.Events);
 
             gestureCount++;
 

@@ -11,7 +11,7 @@ namespace GestureModule
         public void checkPose(Skeleton sk)
         {
             //HandLeft
-            if (sk.Joints[JointType.HandLeft].Position.X - sk.Joints[JointType.Spine].Position.X < -0.4f) 
+            if (sk.Joints[JointType.HandLeft].Position.X - sk.Joints[JointType.Spine].Position.X < -0.4f);
         }
     }
 }

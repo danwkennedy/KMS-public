@@ -12,7 +12,8 @@ namespace GestureModule
         {
 
             //HandRight
-            if (sk.Joints[JointType.HandRight].Position.X - sk.Joints[JointType.Spine].Position.X > .4f) 
+            if (sk.Joints[JointType.HandRight].Position.X - sk.Joints[JointType.Spine].Position.X > .4f)
+ 
         }
     }
 }

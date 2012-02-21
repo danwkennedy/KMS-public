@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5DA17A6D-2594-411D-8F36-6A0685A7E716}</ProjectGuid>
+    <ProjectGuid>{4CAF265E-49B8-4911-97DD-9FB36ABB0FE3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GestureModule</RootNamespace>
-    <AssemblyName>GestureModule</AssemblyName>
+    <RootNamespace>Utils</RootNamespace>
+    <AssemblyName>ClassLibrary1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -41,20 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GestureModule.cs" />
-    <Compile Include="PoseCrouch.cs" />
-    <Compile Include="PoseHandLeft.cs" />
-    <Compile Include="PoseHandRight.cs" />
-    <Compile Include="PoseLeftHandUp.cs" />
-    <Compile Include="PoseList.cs" />
-    <Compile Include="PoseRightHandUp.cs" />
+    <Compile Include="GestureCompletedArgs.cs" />
+    <Compile Include="GestureEvent.cs" />
+    <Compile Include="GestureModuleArgs.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\Utils.csproj">
-      <Project>{4CAF265E-49B8-4911-97DD-9FB36ABB0FE3}</Project>
-      <Name>Utils</Name>
-    </ProjectReference>
+    <Compile Include="SkeletonUpdateArgs.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

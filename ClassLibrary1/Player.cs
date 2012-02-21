@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Kinect;
 
-namespace KinectManagementServer
+namespace Utils
 {
-    class Player
+    public class Player
     {
         private String kinectId;
 

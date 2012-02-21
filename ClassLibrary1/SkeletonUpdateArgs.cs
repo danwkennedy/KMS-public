@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using Microsoft.Kinect;
 
-namespace KinectManagementServer
+namespace Utils
 {
-    class SkeletonUpdateArgs
+    public class SkeletonUpdateArgs
     {
         private string kinectId;
         private List<Skeleton> skeletons;
