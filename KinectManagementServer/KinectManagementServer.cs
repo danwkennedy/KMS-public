@@ -26,6 +26,8 @@ namespace KinectManagementServer
         /// <param name="e">The update args with the KinectId associated with the calling thread and a List of Skeletons to update</param>
         public delegate void UpdateSkeletons(SkeletonUpdateArgs e);
 
+        public delegate void OnCompleted();
+
         #region Vars
 
         /// <summary>
@@ -157,6 +159,15 @@ namespace KinectManagementServer
         public void NoSkeletons(SkeletonUpdateArgs e)
         {
             RemovePlayerList(e.KinectId);
+        }
+
+        #endregion
+
+        #region Gesture Event Handling
+
+        public void OnCompleted()
+        {
+
         }
 
         #endregion
