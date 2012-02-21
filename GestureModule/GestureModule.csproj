@@ -40,7 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="GestureCompletedArgs.cs" />
+    <Compile Include="GestureModule.cs" />
+    <Compile Include="PoseCrouch.cs" />
+    <Compile Include="PoseHandLeft.cs" />
+    <Compile Include="PoseHandRight.cs" />
+    <Compile Include="PoseLeftHandUp.cs" />
+    <Compile Include="PoseList.cs" />
+    <Compile Include="PoseRightHandUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

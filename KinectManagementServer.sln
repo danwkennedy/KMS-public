@@ -10,9 +10,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketServer", "SocketServer\SocketServer.csproj", "{6561DA36-4111-4A95-896A-22EF154235C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{854B3F4B-33EC-4366-8372-E838FA337223}"
-	ProjectSection(SolutionItems) = preProject
-		README = README
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Design", "Design", "{3142B36D-F437-49C9-8386-FFC19DBE781D}"
 EndProject
