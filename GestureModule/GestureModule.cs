@@ -7,6 +7,8 @@ using System.Text;
 
 using Microsoft.Kinect;
 using System.IO;
+using KinectManagementServer;
+
 
 
 /*
@@ -25,12 +27,14 @@ namespace GestureModule
 {
     class GestureModule
     {
+        public delegate void MainThreadEvent(Player p1, Player p2);
         private List<PoseList> poses;
         private PoseCrouch crouch;
         private PoseHandLeft handleft;
         private PoseHandRight handright;
         private PoseLeftHandUp lefthandup;
         private PoseRightHandUp righthandup;
+        private GestureCompletedArgs gestureCompleteArgs;
         
 
         public GestureModule()
@@ -46,21 +50,25 @@ namespace GestureModule
             this.poses.Add(handright);
             this.poses.Add(lefthandup);
             this.poses.Add(righthandup);
+            this.gestureCompleteArgs = new GestureCompletedArgs();
         }
 
-        public void processSkeleton(Skeleton sk)
-        {
+        
+        
 
-
+        public void DoWork(Player p1, Player p2){
             foreach (PoseList p in poses)
             {
-                p.checkPose(sk);
+                p.checkPose(p1);
+                p.checkPose(p2);
             }
 
-
-         
+            // invoke here
 
         }
+         
+
+        
 
     }
 }

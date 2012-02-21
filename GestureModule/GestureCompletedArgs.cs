@@ -20,7 +20,7 @@ namespace GestureModule
 
        
 
-        public List<String> Skeletons
+        public List<String> Events
         {
             get
             {

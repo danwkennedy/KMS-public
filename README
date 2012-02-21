@@ -47,4 +47,5 @@ Changelog:
 
 02/20/2012: Yuxin Ma
 	- Added GestureModule related classes
+	- Made further effort towards making GestureModule compatible with KMS
 
