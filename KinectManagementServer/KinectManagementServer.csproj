@@ -56,6 +56,10 @@
       <Project>{5DA17A6D-2594-411D-8F36-6A0685A7E716}</Project>
       <Name>GestureModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utils\Utils.csproj">
+      <Project>{9853DEA4-DEED-4A1E-AF05-02212FF94196}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
