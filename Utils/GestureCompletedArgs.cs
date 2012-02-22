@@ -8,17 +8,17 @@ namespace Utils
 {
     public class GestureCompletedArgs
     {
-        private List<String> events;
+        private List<GestureEvent> events;
 
         public GestureCompletedArgs()
         {
-            this.events = new List<String>();
+            this.events = new List<GestureEvent>();
            
         }
 
         #region Getters/Setters
 
-        public List<String> Events
+        public List<GestureEvent> Events
         {
             get
             {

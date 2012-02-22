@@ -49,3 +49,6 @@ Changelog:
 	- Added GestureModule related classes
 	- Made further effort towards making GestureModule compatible with KMS
 
+02/21/2012: Daniel Kennedy
+	- Cleanup and added preprocessor commands for console notifications.
+

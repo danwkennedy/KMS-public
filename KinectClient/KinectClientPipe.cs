@@ -37,13 +37,19 @@ namespace KinectClient
         {
             try
             {
+#if (DEBUG)
                 Console.WriteLine("[Client] Starting pipe stream");
+#endif
                 clientStream = new AnonymousPipeClientStream(PipeDirection.Out, serverHandle);
 
+#if (DEBUG)
                 Console.WriteLine("[Client] Stream opened");
+#endif
                 sensor = null;
 
+#if (DEBUG)
                 Console.WriteLine("[Client] Found {0} Kinects", KinectSensor.KinectSensors.Count);
+#endif
 
                 // Start the Kinect
                 initKinect();
@@ -53,7 +59,11 @@ namespace KinectClient
             }
             catch (Exception e)
             {
+#if (DEBUG)
                 Console.WriteLine("[Client] Exception:\n    {0}\nTrace: {1}", e.Message, e.StackTrace);
+#else
+                throw e;
+#endif
             }
         }
 

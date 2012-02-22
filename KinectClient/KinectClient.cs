@@ -125,11 +125,15 @@ namespace KinectClient
         /// <param name="e">Contains data on the sensor</param>
         protected void KinectStatusChange(object sender, StatusChangedEventArgs e)
         {
+#if (DEBUG)
             Console.WriteLine("[Client] Kinect's status changed!");
             Console.WriteLine("[Client] Kinect is running: {0}", e.Sensor.IsRunning);
             Console.WriteLine("[Client] Kinect Skeletal stream is enabled: {0}", e.Sensor.SkeletonStream.IsEnabled);
             Console.WriteLine("[Client] Kinect status: {0}", e.Sensor.Status);
             Console.WriteLine("[Client] Kinect device connection ID: {0}", e.Sensor.DeviceConnectionId);
+#else
+            throw new Exception("[Client] Kinect's status has changed to " + e.Sensor.Status);
+#endif
         }
 
         #endregion

@@ -19,7 +19,6 @@ namespace KinectManagementServer
         private string clientProcess;
         private string kinectId;
 
-        //private ISynchronizeInvoke invoke;
         private KinectManagementServer.UpdateSkeletons update;
         private KinectManagementServer.UpdateSkeletons empty;
 
@@ -31,6 +30,13 @@ namespace KinectManagementServer
             this.empty = _empty;
         }
 
+        #region Main
+
+        /// <summary>
+        /// The main entry point for the spawned thread. 
+        /// If this method is allowed to complete, the thread will be disposed and all 
+        /// memory lost.
+        /// </summary>
         public void ThreadProc()
         {
             AnonymousPipeServerStream pipeServer =
@@ -42,7 +48,9 @@ namespace KinectManagementServer
             childProcess.StartInfo.Arguments += " " + pipeServer.GetClientHandleAsString();
             childProcess.StartInfo.Arguments += " " + kinectId;
 
+#if (DEBUG)
             Console.WriteLine("[Thread] Setting up Kinect with ID: {0}", KinectSensor.KinectSensors[0].UniqueKinectId);
+#endif
 
             childProcess.StartInfo.UseShellExecute = false;
             childProcess.Start();
@@ -51,9 +59,7 @@ namespace KinectManagementServer
 
             try
             {
-                Console.WriteLine("[Thread] Ready for Skeleton data");
                 BinaryFormatter formatter = new BinaryFormatter();
-
                 Skeleton[] skeletonData;
 
                 while (pipeServer.IsConnected)
@@ -67,7 +73,9 @@ namespace KinectManagementServer
                         {
                             if (s.TrackingState == SkeletonTrackingState.Tracked)
                             {
+#if (DEBUG)
                                 Console.WriteLine("[Child] Tracking skeleton with ID: {0}", s.TrackingId);
+#endif
                                 toUpdate.Add(s);
                             }
                         }
@@ -83,15 +91,27 @@ namespace KinectManagementServer
                     }
                     catch (SerializationException e)
                     {
+#if (DEBUG)
                         Console.WriteLine("[Thread] Exception: {0}", e.Message);
+#else
+                        throw e;
+#endif
                     }
                 }
             }
             catch (IOException e)
             {
+#if (DEBUG)
                 Console.WriteLine("[Thread] Error: {0}", e.Message);
+#else
+                throw e;
+#endif
             }
         }
+
+        #endregion
+
+        #region Event Handlers
 
         private void UpdateSkeletons(List<Skeleton> skeletons)
         {
@@ -104,6 +124,20 @@ namespace KinectManagementServer
             SkeletonUpdateArgs args = new SkeletonUpdateArgs(kinectId, null);
             empty.Invoke(args);
         }
+
+        #endregion
+
+        #region Getters / Setters
+
+        public string KinectId
+        {
+            get
+            {
+                return this.kinectId;
+            }
+        }
+
+        #endregion
 
     }
 }

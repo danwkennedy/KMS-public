@@ -28,6 +28,10 @@ namespace KinectManagementServer
         /// <param name="e">The update args with the KinectId associated with the calling thread and a List of Skeletons to update</param>
         public delegate void UpdateSkeletons(SkeletonUpdateArgs e);
 
+        /// <summary>
+        /// A delegate method to allow for the Gesture Module to update the events list
+        /// </summary>
+        /// <param name="e">The update args with the list of new GestureEvents to be sent to the Unity Interface</param>
         public delegate void OnCompleted(GestureModuleArgs e);
 
         #region Vars
@@ -35,12 +39,14 @@ namespace KinectManagementServer
         /// <summary>
         /// A List of all the threads running Kinect PipeServers 
         /// </summary>
-        private List<Thread> kinectPipes;
+        private List<Thread> pipeThreads;
+        private List<PipeServer> pipes;
 
         /// <summary>
         /// A list of all the threads running Gesture Modules
         /// </summary>
-        private List<Thread> gestures;
+        private List<Thread> gestureThreads;
+        //TODO: finish => private List<> gestures;
 
         /// <summary>
         /// A dictionary mapping the KinectId (string) and the SkeletonId (int) to a player
@@ -48,7 +54,7 @@ namespace KinectManagementServer
         private Dictionary<string, Dictionary<int, Player>> players;
 
         private int gestureCount = 0;
-        private List<string> events;
+        private List<GestureEvent> gestureEvents;
 
         #endregion
 
@@ -76,9 +82,10 @@ namespace KinectManagementServer
                     if (sensor.Status == KinectStatus.Connected)
                     {
                         PipeServer server = new PipeServer("D:\\git\\2KinectTechDemo\\KinectClient\\bin\\Debug\\KinectClient.exe", sensor.UniqueKinectId, SkeletonUpdate, NoSkeletons);
+                        pipes.Add(server);
                         Thread kinectThread = new Thread(new ThreadStart(server.ThreadProc));
                         kinectThread.IsBackground = true;
-                        kinectPipes.Add(kinectThread);
+                        pipeThreads.Add(kinectThread);
                         kinectThread.Start();
                         players.Add(sensor.UniqueKinectId, new Dictionary<int, Player>());
                     }
@@ -91,7 +98,13 @@ namespace KinectManagementServer
         /// </summary>
         private void InitGesture()
         {
-
+            foreach (PipeServer server in pipes)
+            {
+                // create a new Gesture object: must be associated with a kinectId, a set of Players and a callback method
+                // add it to gestures
+                // create a thread with a starting method in the Gesture object
+                // start the thread
+            }
         }
 
         /// <summary>
@@ -109,9 +122,14 @@ namespace KinectManagementServer
         /// </summary>
         public KinectManagementServer()
         {
-            kinectPipes = new List<Thread>();
+            pipeThreads = new List<Thread>();
+            pipes = new List<PipeServer>();
+
+            gestureThreads = new List<Thread>();
+            //TODO: finish => gestures = new List<>();
+
             players = new Dictionary<string, Dictionary<int, Player>>();
-            events = new List<string>();
+            gestureEvents = new List<GestureEvent>();
         }
 
         /// <summary>
@@ -121,10 +139,7 @@ namespace KinectManagementServer
         {
             InitializeComponents();
 
-            while (true)
-            {
-
-            }
+            while (true) ;
         }
 
         #region Pipe Event Handling
@@ -136,7 +151,9 @@ namespace KinectManagementServer
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void SkeletonUpdate(SkeletonUpdateArgs e)
         {
+#if (DEBUG)
             Console.WriteLine("[Main] Received skeletons from {0}", e.KinectId);
+#endif
 
             foreach (Skeleton skeleton in e.Skeletons)
             {
@@ -147,10 +164,12 @@ namespace KinectManagementServer
                 }
                 catch (KeyNotFoundException e1)
                 {
-                    if (players.Count < (kinectPipes.Count * 2))
+                    if (players.Count < (pipeThreads.Count * 2))
                     {
                         AddPlayer(new Player(players.Count, e.KinectId, skeleton));
+#if(DEBUG)
                         Console.WriteLine("Adding new player");
+#endif
                     }
                 }
             }
@@ -177,23 +196,26 @@ namespace KinectManagementServer
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void OnGestureCompleted(GestureCompletedArgs e)
         {
-            events.AddRange(e.Events);
+            gestureEvents.AddRange(e.Events);
 
             gestureCount++;
 
-            if (gestureCount == kinectPipes.Count)
-            {
-                foreach (string s in events)
-                {
-                    Console.WriteLine("[Event] " + s);
-                }
 
-                events.RemoveRange(0, events.Count);
+            if (gestureCount == pipeThreads.Count)
+            {
+
+#if (DEBUG)
+                foreach (GestureEvent s in gestureEvents)
+                {
+                    Console.WriteLine("[Event] " + s.Gesture);
+                }
+#endif
+
+                gestureEvents.RemoveRange(0, gestureEvents.Count);
             }
         }
 
         #endregion
-
 
         #region Player Management
 
@@ -219,7 +241,9 @@ namespace KinectManagementServer
             {
                 try
                 {
+#if (DEBUG)
                     Console.WriteLine("[Client] Removing Player number {0}", players[KID][keys[i]].PlayerId);
+#endif
                     players[KID].Remove(keys[i]);
                 }
                 finally { }

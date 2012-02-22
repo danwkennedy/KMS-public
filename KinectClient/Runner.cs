@@ -22,7 +22,11 @@ namespace KinectClient
             // We are expecting exactly two arguments (both are required)
             if (args.Length != 2)
             {
+#if (DEBUG)
                 Console.WriteLine("Both pipes and sockets are expecting two arguments");
+#else 
+                throw new Exception("Both pipes and sockets are expecting two arguments");
+#endif
             }
             else
             {
