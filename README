@@ -52,3 +52,6 @@ Changelog:
 02/21/2012: Daniel Kennedy
 	- Cleanup and added preprocessor commands for console notifications.
 
+02/21/2012: Yuxin Ma
+	- Further effort into getting GestureModule to work with KMS
+	- Fixed GestureModule related redlines

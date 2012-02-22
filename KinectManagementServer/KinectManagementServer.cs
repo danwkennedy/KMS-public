@@ -6,7 +6,7 @@ using Microsoft.Kinect;
 using System.Threading;
 using System.Runtime.Remoting.Contexts;
 using System.Runtime.CompilerServices;
-using GestureModule;
+using KinectManagementServer;
 using Utils;
 
 namespace KinectManagementServer
@@ -32,7 +32,7 @@ namespace KinectManagementServer
         /// A delegate method to allow for the Gesture Module to update the events list
         /// </summary>
         /// <param name="e">The update args with the list of new GestureEvents to be sent to the Unity Interface</param>
-        public delegate void OnCompleted(GestureModuleArgs e);
+        public delegate void OnCompleted(GestureCompletedArgs e);
 
         #region Vars
 

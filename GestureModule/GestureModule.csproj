@@ -8,7 +8,7 @@
     <ProjectGuid>{5DA17A6D-2594-411D-8F36-6A0685A7E716}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GestureModule</RootNamespace>
+    <RootNamespace>KinectManagementServer</RootNamespace>
     <AssemblyName>GestureModule</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

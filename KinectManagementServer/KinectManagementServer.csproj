@@ -45,9 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GestureModuleArgs.cs" />
+    <Compile Include="GestureThread.cs" />
     <Compile Include="KinectManagementServer.cs" />
     <Compile Include="PipeServer.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="Runner.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
