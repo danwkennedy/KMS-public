@@ -58,3 +58,7 @@ Changelog:
 
 02/23/2012: Daniel Kennedy
 	- Finished integrating the Gesture thread into the KMS.
+
+02/24/2012: Yuxin Ma
+	- Refactored GestureModule to get rid of cross reference issues
+	- Made so that GestureModule.ProcessPlayer return GestureEvent 

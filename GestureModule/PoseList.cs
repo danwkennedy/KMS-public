@@ -7,24 +7,12 @@ using Utils;
 
 namespace GestureModule
 {
-    abstract class PoseList
+    public interface PoseList
     {
-        private GestureModule gm;
 
-        public PoseList()
-        {
 
-        }
 
-        public PoseList(GestureModule gm)
-        {
-
-            this.gm = gm;
-        }
-        public void checkPose(Player p1)
-        {
-            
-        }
+        GestureEvent checkPose(Player p1);
 
     }
 }
