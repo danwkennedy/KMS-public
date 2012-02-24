@@ -10,10 +10,9 @@ namespace Utils
     {
         private List<GestureEvent> events;
 
-        public GestureCompletedArgs()
+        public GestureCompletedArgs(List<GestureEvent> _events)
         {
-            this.events = new List<GestureEvent>();
-           
+            events = _events;
         }
 
         #region Getters/Setters

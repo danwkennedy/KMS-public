@@ -46,6 +46,8 @@ namespace KinectManagementServer
         /// A list of all the threads running Gesture Modules
         /// </summary>
         private List<Thread> gestureThreads;
+        //private List<GestureThread> gestures;
+        private Dictionary<string, GestureThread.MainCall> gestureModules;
         //TODO: finish => private List<> gestures;
 
         /// <summary>
@@ -104,6 +106,11 @@ namespace KinectManagementServer
                 // add it to gestures
                 // create a thread with a starting method in the Gesture object
                 // start the thread
+                GestureThread gesture = new GestureThread(this.OnGestureCompleted, server.KinectId);
+                //gestures.Add(gesture);
+                gestureModules.Add(server.KinectId, gesture.getWorkPointer());
+                Thread gestureThread = new Thread(new ThreadStart(gesture.ThreadProc));
+                gestureThread.Start();
             }
         }
 
@@ -126,7 +133,8 @@ namespace KinectManagementServer
             pipes = new List<PipeServer>();
 
             gestureThreads = new List<Thread>();
-            //TODO: finish => gestures = new List<>();
+            //gestures = new List<GestureThread>();
+            gestureModules = new Dictionary<string, GestureThread.MainCall>();
 
             players = new Dictionary<string, Dictionary<int, Player>>();
             gestureEvents = new List<GestureEvent>();
@@ -175,6 +183,11 @@ namespace KinectManagementServer
             }
 
             // Call to gesture module
+            if (players[e.KinectId].Values.Count > 0) {
+                GestureModuleArgs args = new GestureModuleArgs(players[e.KinectId].Values.ToList<Player>());
+                gestureModules[e.KinectId].BeginInvoke(args, null, null);
+            }
+            
         }
 
         /// <summary>
@@ -211,7 +224,8 @@ namespace KinectManagementServer
                 }
 #endif
 
-                gestureEvents.RemoveRange(0, gestureEvents.Count);
+                gestureEvents.Clear();
+                gestureCount = 0;
             }
         }
 

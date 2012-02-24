@@ -37,7 +37,7 @@ namespace GestureModule
 
         public GestureModule()
         {
-
+            poses = new List<PoseList>();
             this.crouch = new PoseCrouch(this);
             this.handleft = new PoseHandLeft(this);
             this.handright = new PoseHandRight(this);
@@ -48,13 +48,13 @@ namespace GestureModule
             this.poses.Add(handright);
             this.poses.Add(lefthandup);
             this.poses.Add(righthandup);
-            this.gestureCompleteArgs = new GestureCompletedArgs();
+            //this.gestureCompleteArgs = new GestureCompletedArgs();
         }
 
 
         public void addEvent(String s)
         {
-            this.gestureCompleteArgs.Events.Add(new GestureEvent(s);
+            this.gestureCompleteArgs.Events.Add(new GestureEvent(s));
 
         }
         

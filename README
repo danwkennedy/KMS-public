@@ -55,3 +55,6 @@ Changelog:
 02/21/2012: Yuxin Ma
 	- Further effort into getting GestureModule to work with KMS
 	- Fixed GestureModule related redlines
+
+02/23/2012: Daniel Kennedy
+	- Finished integrating the Gesture thread into the KMS.
