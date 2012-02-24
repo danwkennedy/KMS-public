@@ -108,7 +108,7 @@ namespace KinectManagementServer
                 // start the thread
                 GestureThread gesture = new GestureThread(this.OnGestureCompleted, server.KinectId);
                 //gestures.Add(gesture);
-                gestureModules.Add(server.KinectId, gesture.getWorkPointer());
+                gestureModules.Add(server.KinectId, gesture.Worker);
                 Thread gestureThread = new Thread(new ThreadStart(gesture.ThreadProc));
                 gestureThread.Start();
             }
