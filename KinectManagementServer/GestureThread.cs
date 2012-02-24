@@ -102,9 +102,9 @@ namespace KinectManagementServer
         public void DoWork(GestureModuleArgs e)
         {
             // Run the gesture module on the given Players
-            //this.gestureModule.processPlayers(e.Players);
-            List<GestureEvent> events = new List<GestureEvent>();
-            events.Add(new GestureEvent("Testing"));
+            List<GestureEvent> events = this.gestureModule.processPlayers(e.Players);
+            //List<GestureEvent> events = new List<GestureEvent>();
+            //events.Add(new GestureEvent("Testing"));
 
             GestureCompletedArgs args = new GestureCompletedArgs(events);
 
