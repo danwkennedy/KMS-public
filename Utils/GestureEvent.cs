@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Utils
 {
-    public class GestureEvent
+    public struct GestureEvent
     {
         private string gesture;
 
@@ -21,7 +21,7 @@ namespace Utils
         {
             get
             {
-                return this.gesture;
+                return gesture;
             }
         }
 

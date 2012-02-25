@@ -6,7 +6,7 @@ using Microsoft.Kinect;
 
 namespace Utils
 {
-    public class SkeletonUpdateArgs
+    public struct SkeletonUpdateArgs
     {
         private string kinectId;
         private List<Skeleton> skeletons;

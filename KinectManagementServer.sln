@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinectClient", "KinectClien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestureModule", "GestureModule\GestureModule.csproj", "{5DA17A6D-2594-411D-8F36-6A0685A7E716}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketServer", "SocketServer\SocketServer.csproj", "{6561DA36-4111-4A95-896A-22EF154235C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityInterface", "SocketServer\UnityInterface.csproj", "{6561DA36-4111-4A95-896A-22EF154235C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{854B3F4B-33EC-4366-8372-E838FA337223}"
 	ProjectSection(SolutionItems) = preProject

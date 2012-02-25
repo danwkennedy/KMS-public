@@ -9,7 +9,6 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.ComponentModel;
-//using KinectManagementServer;
 using Utils;
 
 namespace KinectManagementServer
@@ -74,7 +73,7 @@ namespace KinectManagementServer
                             if (s.TrackingState == SkeletonTrackingState.Tracked)
                             {
 #if (DEBUG)
-                                Console.WriteLine("[Child] Tracking skeleton with ID: {0}", s.TrackingId);
+                                //Console.WriteLine("[Child] Tracking skeleton with ID: {0}", s.TrackingId);
 #endif
                                 toUpdate.Add(s);
                             }

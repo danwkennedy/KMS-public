@@ -160,7 +160,7 @@ namespace KinectManagementServer
         public void SkeletonUpdate(SkeletonUpdateArgs e)
         {
 #if (DEBUG)
-            Console.WriteLine("[Main] Received skeletons from {0}", e.KinectId);
+            //Console.WriteLine("[Main] Received skeletons from {0}", e.KinectId);
 #endif
 
             foreach (Skeleton skeleton in e.Skeletons)

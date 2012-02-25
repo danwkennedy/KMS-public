@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Kinect;
 
 namespace Utils
 {
-    public struct GestureCompletedArgs
+    public struct UnityModuleArgs
     {
         private List<GestureEvent> events;
 
-        public GestureCompletedArgs(List<GestureEvent> _events)
+        public UnityModuleArgs(List<GestureEvent> _events)
         {
             events = _events;
         }
 
-        #region Getters/Setters
+        #region Getters / Setters
 
         public List<GestureEvent> Events
         {
@@ -26,5 +25,6 @@ namespace Utils
         }
 
         #endregion
+
     }
 }
