@@ -62,3 +62,7 @@ Changelog:
 02/24/2012: Yuxin Ma
 	- Refactored GestureModule to get rid of cross reference issues
 	- Made so that GestureModule.ProcessPlayer return GestureEvent 
+
+02/25/2012: Bailey Hayes
+	- Refactored GestureEvent ToString to JSON format and contains new event properties
+	- Refactored DemoClient to send JSON formatted strings with concatenated GestureEvents
