@@ -11,11 +11,10 @@ namespace Utils
         private int player;
         private int timestamp;
 
-        public GestureEvent(string _type, int _player, int _timestamp)
+        public GestureEvent(string _type, int _player)
         {
             type = _type;
             player = _player;
-            timestamp = _timestamp;
         }
 
 

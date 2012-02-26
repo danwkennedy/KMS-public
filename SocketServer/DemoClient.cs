@@ -13,7 +13,7 @@ namespace UnityInterface
     /**
      * Shows how one may send strings to the unity server.
      */
-    class UnityThread
+    public class UnityThread
     {
 
         #region Vars
@@ -132,6 +132,7 @@ namespace UnityInterface
         public void SendToUnity(UnityModuleArgs events)
         {
             string packet = FormatJSON(events);
+            tic++;
 
             Console.WriteLine("[Client] Sending Data: " + packet);
             writeSocket(packet);
@@ -149,6 +150,7 @@ namespace UnityInterface
 
             foreach (GestureEvent gEvent in e.Events)
             {
+                gEvent.Timestamp = tic;
                 if (i > 0) // if there's more than one event in packet
                 {
                     json += ",";

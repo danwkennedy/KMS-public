@@ -8,6 +8,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Runtime.CompilerServices;
 using KinectManagementServer;
 using Utils;
+using UnityInterface;
 
 namespace KinectManagementServer
 {
@@ -57,6 +58,9 @@ namespace KinectManagementServer
 
         private int gestureCount = 0;
         private List<GestureEvent> gestureEvents;
+
+        private UnityThread unity;
+        private UnityThread.MainCall unityInterface;
 
         #endregion
 
@@ -119,6 +123,10 @@ namespace KinectManagementServer
         /// </summary>
         private void InitSocketServer()
         {
+            unity = new UnityThread();
+            unityInterface = unity.Worker;
+            Thread unityThread = new Thread(new ThreadStart(unity.ThreadProc));
+            unityThread.Start();
 
         }
 
@@ -159,8 +167,8 @@ namespace KinectManagementServer
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void SkeletonUpdate(SkeletonUpdateArgs e)
         {
-#if (DEBUG)
-            //Console.WriteLine("[Main] Received skeletons from {0}", e.KinectId);
+#if (PIPE_DEBUG || DEBUG_ALL)
+            Console.WriteLine("[Main] Received skeletons from {0}", e.KinectId);
 #endif
 
             foreach (Skeleton skeleton in e.Skeletons)
@@ -175,7 +183,7 @@ namespace KinectManagementServer
                     if (players.Count < (pipeThreads.Count * 2))
                     {
                         AddPlayer(new Player(players.Count, e.KinectId, skeleton));
-#if(DEBUG)
+#if(PLAYER_DEBUG)
                         Console.WriteLine("Adding new player");
 #endif
                     }
@@ -217,12 +225,13 @@ namespace KinectManagementServer
             if (gestureCount == pipeThreads.Count)
             {
 
-#if (DEBUG)
+#if (GESTURE_DEBUG)
                 foreach (GestureEvent s in gestureEvents)
                 {
                     Console.WriteLine("[Event] " + s.Gesture);
                 }
 #endif
+                unityInterface.BeginInvoke(new UnityModuleArgs(gestureEvents), null, null);
 
                 gestureEvents.Clear();
                 gestureCount = 0;

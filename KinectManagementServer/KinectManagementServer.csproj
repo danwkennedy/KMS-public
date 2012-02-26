@@ -55,6 +55,10 @@
       <Project>{5DA17A6D-2594-411D-8F36-6A0685A7E716}</Project>
       <Name>GestureModule</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SocketServer\UnityInterface.csproj">
+      <Project>{6561DA36-4111-4A95-896A-22EF154235C4}</Project>
+      <Name>UnityInterface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{9853DEA4-DEED-4A1E-AF05-02212FF94196}</Project>
       <Name>Utils</Name>

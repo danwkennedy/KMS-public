@@ -9,11 +9,16 @@ namespace GestureModule
 {
     class PoseCrouch: PoseList
     {
+        string type = "Crouch";
         
         public GestureEvent checkPose(Player p1)
         {
             //Crouching Logic
-            if (p1.Skeleton.Joints[JointType.Head].Position.Y < 0.5f && p1.Skeleton.Joints[JointType.Head].Position.Y > 0.2f) return new GestureEvent("Player" + p1.PlayerId + " from Kinect" + p1.KinectId + "crouched");
+            if (p1.Skeleton.Joints[JointType.Head].Position.Y < 0.5f && p1.Skeleton.Joints[JointType.Head].Position.Y > 0.2f)
+            {
+                return new GestureEvent(type, p1.PlayerId);
+            }
+
             return null;
         }
     }
