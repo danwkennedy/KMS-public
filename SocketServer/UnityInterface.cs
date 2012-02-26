@@ -10,9 +10,13 @@ using Utils;
 
 namespace UnityInterface
 {
-    /**
-     * Shows how one may send strings to the unity server.
-     */
+    /// <summary>
+    /// Provides a Socket interface to the Unity game.
+    /// The thread associated with an instance of this class 
+    /// receives a list of GestureEvents from the main thread 
+    /// and transmits the event to the running Unity game for 
+    /// processing.
+    /// </summary>
     public class UnityThread
     {
 
@@ -25,34 +29,53 @@ namespace UnityInterface
         /// <param name="e">The list of Players to process</param>
         public delegate void MainCall(UnityModuleArgs e);
 
-        public readonly Int32 PORT = 5300;
-        public readonly String IP = "localhost";
-        public readonly int SEND_TIMEOUT = 1000;
-        public int MAX_SEND = 1000000;
-        public int tic = 0; // timestamp of events, used to queue events in unity EventManager
+        /// <summary>
+        /// The port to transmit to
+        /// </summary>
+        private sealed readonly Int32 PORT = 5300;
 
-        internal Boolean socketReady = false;
+        /// <summary>
+        /// The IP address to transmit to
+        /// </summary>
+        private sealed readonly String IP = "localhost";
 
+        /// <summary>
+        /// Keeps track of the number of event frames
+        /// </summary>
+        private int tic = 0;
+
+        /// <summary>
+        /// The reference to the TCPClient socket
+        /// </summary>
         TcpClient clientSock;
-        NetworkStream netStream;
+
+        /// <summary>
+        /// Writes to the network stream
+        /// </summary>
         StreamWriter writer;
+
+        /// <summary>
+        /// Reads from the network stream
+        /// </summary>
         StreamReader reader;
 
         #endregion
 
         #region Init
 
+        /// <summary>
+        /// Initializes the client TCP socket as well as 
+        /// the StreamReader and StreamWriter.
+        /// </summary>
         private void Initialize()
         {
             try
             {
                 clientSock = new TcpClient(IP, PORT);
-                // get the stream for reading/writing.
                 Console.WriteLine("[Client] Starting socket stream");
-                netStream = clientSock.GetStream();
+                NetworkStream netStream = clientSock.GetStream();
                 writer = new StreamWriter(netStream);
                 reader = new StreamReader(netStream);
-                socketReady = true;
                 Console.WriteLine("[Client] Stream opened");
             }
             catch (Exception e)
@@ -76,48 +99,58 @@ namespace UnityInterface
             Wait();
         }
 
+        /// <summary>
+        /// Keeps the thread alive by locking it in a while
+        /// </summary>
         private void Wait()
         {
-            while (true) ;
+            while (clientSock.Connected) ;
         }
 
         #endregion
 
         #region Socket Functions
 
+        /// <summary>
+        /// Writes a string to the socket
+        /// </summary>
+        /// <param name="output">The string to output to the socket</param>
         public void writeSocket(string output)
         {
-            if (!socketReady)
+            if (clientSock.Connected)
             {
-                return;
+                writer.Write(output);
+                writer.Flush();
             }
-            writer.Write(output);
-            writer.Flush();
         }
 
+        /// <summary>
+        /// Reads an input string from the socket
+        /// </summary>
+        /// <returns></returns>
         public String readSocket()
         {
-            if (!socketReady)
-            {
-                return "";
-            }
-            if (netStream.DataAvailable)
+            if (clientSock.Connected && !reader.EndOfStream)
             {
                 return reader.ReadLine();
             }
-            return "";
+            else
+            {
+                return "";
+            }
+            
         }
 
+        /// <summary>
+        /// Closes the socket
+        /// </summary>
         public void closeSocket()
         {
-            if (!socketReady)
+            if (clientSock.Connected)
             {
-                return;
+                writer.Close();
+                reader.Close();
             }
-            writer.Close();
-            reader.Close();
-            netStream.Close();
-            socketReady = false;
         }
 
         #endregion
