@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 using Utils;
+using System.Runtime.CompilerServices;
 
 namespace UnityInterface
 {
@@ -32,12 +33,12 @@ namespace UnityInterface
         /// <summary>
         /// The port to transmit to
         /// </summary>
-        private sealed readonly Int32 PORT = 5300;
+        private readonly Int32 PORT = 5300;
 
         /// <summary>
         /// The IP address to transmit to
         /// </summary>
-        private sealed readonly String IP = "localhost";
+        private readonly String IP = "localhost";
 
         /// <summary>
         /// Keeps track of the number of event frames
@@ -81,6 +82,7 @@ namespace UnityInterface
             catch (Exception e)
             {
                 Console.WriteLine("[Client] Exception:\n    {0}\nTrace: {1}", e.Message, e.StackTrace);
+                while (true) ;
             }
         }
 
@@ -119,7 +121,7 @@ namespace UnityInterface
         {
             if (clientSock.Connected)
             {
-                writer.Write(output);
+                writer.WriteLine(output);
                 writer.Flush();
             }
         }
@@ -162,13 +164,15 @@ namespace UnityInterface
         /// job to this gesture thread. Formats event in JSON
         /// </summary>
         /// <param name="e">A wrapper class containing the Player data to check for poses</param>
+        [MethodImpl(MethodImplOptions.Synchronized)]
         public void SendToUnity(UnityModuleArgs events)
         {
             string packet = FormatJSON(events);
             tic++;
 
-            Console.WriteLine("[Client] Sending Data: " + packet);
+            //Console.WriteLine("[Client] Sending Data: " + packet);
             writeSocket(packet);
+            //Console.WriteLine("[Client] Written to socket");
         }
 
         /// <summary>

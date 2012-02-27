@@ -9,10 +9,6 @@ namespace GestureModule
 {
     public interface PoseList
     {
-
-
-
         GestureEvent checkPose(Player p1);
-
     }
 }
