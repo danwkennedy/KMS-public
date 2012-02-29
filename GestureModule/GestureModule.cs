@@ -21,6 +21,9 @@ namespace GestureModule
         private PoseHandRight handright;
         private PoseLeftHandUp lefthandup;
         private PoseRightHandUp righthandup;
+        private PoseLeanLeft leanleft;
+        private PoseLeanRight leanright;
+        private PoseLeanStop leanstop;
        
         
 
@@ -32,11 +35,17 @@ namespace GestureModule
             this.handright = new PoseHandRight();
             this.lefthandup = new PoseLeftHandUp();
             this.righthandup = new PoseRightHandUp();
+            this.leanleft = new PoseLeanLeft();
+            this.leanright = new PoseLeanRight();
+            this.leanstop = new PoseLeanStop();
             this.poses.Add(crouch);
             this.poses.Add(handleft);
             this.poses.Add(handright);
             this.poses.Add(lefthandup);
             this.poses.Add(righthandup);
+            this.poses.Add(leanleft);
+            this.poses.Add(leanright);
+            this.poses.Add(leanstop);
         }
 
 

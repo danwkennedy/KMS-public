@@ -73,5 +73,6 @@ Changelog:
 	- Refactored the UnityInterface class
 	- Documented the UnityInterface class
 
-02/28/2012:
+02/28/2012: Yuxin Ma
 	- Made a temporary hack to PoseRightHandUp changed message to "handup" to help demo
+	- Made PoseLeanRight PoseLeanLeft PoseLeanStop classes 

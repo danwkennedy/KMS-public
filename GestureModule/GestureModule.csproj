@@ -86,6 +86,9 @@
     <Compile Include="PoseCrouch.cs" />
     <Compile Include="PoseHandLeft.cs" />
     <Compile Include="PoseHandRight.cs" />
+    <Compile Include="PoseLeanLeft.cs" />
+    <Compile Include="PoseLeanRight.cs" />
+    <Compile Include="PoseLeanStop.cs" />
     <Compile Include="PoseLeftHandUp.cs" />
     <Compile Include="PoseList.cs" />
     <Compile Include="PoseRightHandUp.cs" />
