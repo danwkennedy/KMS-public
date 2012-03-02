@@ -7,21 +7,22 @@ using Utils;
 
 namespace GestureModule
 {
-    class PoseLeftHandUp : PoseList
+    class PoseLeanRight : PoseList
     {
 
-        string type = "LeftHandUp";
-       
+        string type = "leanRight";
+
         public GestureEvent checkPose(Player p1)
         {
-            //LeftHandUp
-            if (p1.Skeleton.Joints[JointType.HandLeft].Position.Y - p1.Skeleton.Joints[JointType.Head].Position.Y > 0.1f)
+            
+            //LeanRight
+            if (p1.Skeleton.Joints[JointType.ShoulderCenter].Position.X - p1.Skeleton.Joints[JointType.HipCenter].Position.X > .1f)
             {
                 return new GestureEvent(type, p1.PlayerId);
             }
 
             return null;
         }
+
     }
 }
-

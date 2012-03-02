@@ -9,19 +9,18 @@ namespace GestureModule
 {
     class PoseHandRight : PoseList
     {
-        private GestureModule gestureModule;
+        string type = "HandRight";
 
-        public PoseHandRight(GestureModule gestureModule)
-        {
-            // TODO: Complete member initialization
-            this.gestureModule = gestureModule;
-        }
-        public void checkPose(Player p1)
+        public GestureEvent checkPose(Player p1)
         {
 
             //HandRight
-            if (p1.Skeleton.Joints[JointType.HandRight].Position.X - p1.Skeleton.Joints[JointType.Spine].Position.X > .4f) gestureModule.addEvent("Player" + p1.PlayerId + " from Kinect" + p1.KinectId + "has hand right");
- 
+            if (p1.Skeleton.Joints[JointType.HandRight].Position.X - p1.Skeleton.Joints[JointType.Spine].Position.X > .4f)
+            {
+                return new GestureEvent(type, p1.PlayerId);
+            }
+
+            return null;
         }
     }
 }

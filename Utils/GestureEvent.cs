@@ -7,25 +7,63 @@ namespace Utils
 {
     public class GestureEvent
     {
-        private string gesture;
+        private string type;
+        private int player;
+        private int timestamp;
 
-        public GestureEvent(string _gesture)
+        public GestureEvent(string _type, int _player)
         {
-            gesture = _gesture;
+            type = _type;
+            player = _player;
         }
 
 
         #region Getters / Setters
 
-        public string Gesture
+        public string Type
         {
             get
             {
-                return this.gesture;
+                return type;
+            }
+            set
+            {
+                this.type = value;
+            }
+        }
+
+        public int Player
+        {
+            get
+            {
+                return player;
+            }
+            set
+            {
+                this.player = value;
+            }
+        }
+
+        public int Timestamp
+        {
+            get
+            {
+                return timestamp;
+            }
+            set
+            {
+                this.timestamp = value;
             }
         }
 
         #endregion
-
+        /// <summary>
+        /// Formats a GestureEvent in JSON: {"type":"handLeft","player":"1","timestamp":"123"}
+        /// </summary>
+        /// <returns>JSON String</returns>
+        override public string ToString()
+        {
+            return "{\"type\":\""+type+"\",\"player\":\""+player+"\",\"timestamp\":\""+timestamp+"\"}";
+        }
     }
 }

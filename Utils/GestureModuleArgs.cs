@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Utils
 {
-    public class GestureModuleArgs
+    public struct GestureModuleArgs
     {
         private List<Player> players;
 

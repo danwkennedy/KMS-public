@@ -8,6 +8,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Runtime.CompilerServices;
 using KinectManagementServer;
 using Utils;
+using UnityInterface;
 
 namespace KinectManagementServer
 {
@@ -58,6 +59,11 @@ namespace KinectManagementServer
         private int gestureCount = 0;
         private List<GestureEvent> gestureEvents;
 
+        private UnityThread unity;
+        private UnityThread.MainCall unityInterface;
+
+        private Thread unityThread;
+
         #endregion
 
         #region Init
@@ -83,7 +89,7 @@ namespace KinectManagementServer
                 {
                     if (sensor.Status == KinectStatus.Connected)
                     {
-                        PipeServer server = new PipeServer("D:\\git\\2KinectTechDemo\\KinectClient\\bin\\Debug\\KinectClient.exe", sensor.UniqueKinectId, SkeletonUpdate, NoSkeletons);
+                        PipeServer server = new PipeServer("D:\\git\\2KinectTechDemo\\KinectClient\\bin\\Release\\KinectClient.exe", sensor.UniqueKinectId, SkeletonUpdate, NoSkeletons);
                         pipes.Add(server);
                         Thread kinectThread = new Thread(new ThreadStart(server.ThreadProc));
                         kinectThread.IsBackground = true;
@@ -119,6 +125,10 @@ namespace KinectManagementServer
         /// </summary>
         private void InitSocketServer()
         {
+            unity = new UnityThread();
+            unityInterface = unity.Worker;
+            unityThread = new Thread(new ThreadStart(unity.ThreadProc));
+            unityThread.Start();
 
         }
 
@@ -159,7 +169,7 @@ namespace KinectManagementServer
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void SkeletonUpdate(SkeletonUpdateArgs e)
         {
-#if (DEBUG)
+#if (PIPE_DEBUG || DEBUG_ALL)
             Console.WriteLine("[Main] Received skeletons from {0}", e.KinectId);
 #endif
 
@@ -175,7 +185,7 @@ namespace KinectManagementServer
                     if (players.Count < (pipeThreads.Count * 2))
                     {
                         AddPlayer(new Player(players.Count, e.KinectId, skeleton));
-#if(DEBUG)
+#if(PLAYER_DEBUG)
                         Console.WriteLine("Adding new player");
 #endif
                     }
@@ -209,20 +219,21 @@ namespace KinectManagementServer
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void OnGestureCompleted(GestureCompletedArgs e)
         {
+            
             gestureEvents.AddRange(e.Events);
-
             gestureCount++;
 
-
-            if (gestureCount == pipeThreads.Count)
+            if (gestureCount >= pipeThreads.Count && gestureEvents.Count > 0)
             {
 
-#if (DEBUG)
-                foreach (GestureEvent s in gestureEvents)
-                {
-                    Console.WriteLine("[Event] " + s.Gesture);
-                }
-#endif
+//#if (DEBUG)
+//                foreach (GestureEvent s in gestureEvents)
+//                {
+//                    Console.WriteLine("[Event] " + s.Type);
+//                }
+//#endif
+                //Console.WriteLine(unityThread.ThreadState);
+                unityInterface.Invoke(new UnityModuleArgs(gestureEvents));
 
                 gestureEvents.Clear();
                 gestureCount = 0;

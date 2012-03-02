@@ -58,3 +58,21 @@ Changelog:
 
 02/23/2012: Daniel Kennedy
 	- Finished integrating the Gesture thread into the KMS.
+
+02/24/2012: Yuxin Ma
+	- Refactored GestureModule to get rid of cross reference issues
+	- Made so that GestureModule.ProcessPlayer return GestureEvent 
+
+02/25/2012: Bailey Hayes
+	- Refactored GestureEvent ToString to JSON format and contains new event properties
+	- Refactored DemoClient to send JSON formatted strings with concatenated GestureEvents
+
+02/25/2012: Daniel Kennedy
+	- Refactored the Pose classes to handle the new GestureEvent class
+	- Finished setting up the UnityInterface
+	- Refactored the UnityInterface class
+	- Documented the UnityInterface class
+
+02/28/2012: Yuxin Ma
+	- Made a temporary hack to PoseRightHandUp changed message to "handup" to help demo
+	- Made PoseLeanRight PoseLeanLeft PoseLeanStop classes 

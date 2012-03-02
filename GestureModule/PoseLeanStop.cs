@@ -7,15 +7,15 @@ using Utils;
 
 namespace GestureModule
 {
-    class PoseLeftHandUp : PoseList
+    class PoseLeanStop : PoseList
     {
+        string type = "stopLean";
 
-        string type = "LeftHandUp";
-       
         public GestureEvent checkPose(Player p1)
         {
-            //LeftHandUp
-            if (p1.Skeleton.Joints[JointType.HandLeft].Position.Y - p1.Skeleton.Joints[JointType.Head].Position.Y > 0.1f)
+
+            //LeanRight
+            if (p1.Skeleton.Joints[JointType.ShoulderCenter].Position.X - p1.Skeleton.Joints[JointType.HipCenter].Position.X > -0.1f && p1.Skeleton.Joints[JointType.ShoulderCenter].Position.X - p1.Skeleton.Joints[JointType.HipCenter].Position.X < 0.1f)
             {
                 return new GestureEvent(type, p1.PlayerId);
             }
@@ -24,4 +24,3 @@ namespace GestureModule
         }
     }
 }
-

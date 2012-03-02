@@ -9,17 +9,6 @@ using Microsoft.Kinect;
 using System.IO;
 using Utils;
 
-/*
- * 
- * 
- * make sure the main class has this:
- * public enum Pose { lefthandup, righthandup, handleft, handright, crouch }
- * 
- * 
- * 
- * 
- * 
- */
 
 namespace GestureModule
 {
@@ -32,44 +21,53 @@ namespace GestureModule
         private PoseHandRight handright;
         private PoseLeftHandUp lefthandup;
         private PoseRightHandUp righthandup;
-        private GestureCompletedArgs gestureCompleteArgs;
+        private PoseLeanLeft leanleft;
+        private PoseLeanRight leanright;
+        private PoseLeanStop leanstop;
+       
         
 
         public GestureModule()
         {
             poses = new List<PoseList>();
-            this.crouch = new PoseCrouch(this);
-            this.handleft = new PoseHandLeft(this);
-            this.handright = new PoseHandRight(this);
-            this.lefthandup = new PoseLeftHandUp(this);
-            this.righthandup = new PoseRightHandUp(this);
+            this.crouch = new PoseCrouch();
+            this.handleft = new PoseHandLeft();
+            this.handright = new PoseHandRight();
+            this.lefthandup = new PoseLeftHandUp();
+            this.righthandup = new PoseRightHandUp();
+            this.leanleft = new PoseLeanLeft();
+            this.leanright = new PoseLeanRight();
+            this.leanstop = new PoseLeanStop();
             this.poses.Add(crouch);
             this.poses.Add(handleft);
             this.poses.Add(handright);
             this.poses.Add(lefthandup);
             this.poses.Add(righthandup);
-            //this.gestureCompleteArgs = new GestureCompletedArgs();
+            this.poses.Add(leanleft);
+            this.poses.Add(leanright);
+            this.poses.Add(leanstop);
         }
 
 
-        public void addEvent(String s)
-        {
-            this.gestureCompleteArgs.Events.Add(new GestureEvent(s));
-
-        }
+        
         
 
-        public void processPlayers(List<Player> playerList){
+        public List<GestureEvent> processPlayers(List<Player> playerList){
+            List<GestureEvent> gestureEvents = new List<GestureEvent>();
             foreach (PoseList p in poses)
             {
                 foreach (Player player in playerList)
                 {
-                    p.checkPose(player);
+                    GestureEvent pose = p.checkPose(player);
+                    if (pose != null)
+                    {
+                        gestureEvents.Add(pose);
+                    }
 
                 }
             }
 
-        
+            return gestureEvents;
 
         }
 

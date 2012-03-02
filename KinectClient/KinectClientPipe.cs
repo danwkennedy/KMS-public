@@ -47,9 +47,9 @@ namespace KinectClient
 #endif
                 sensor = null;
 
-#if (DEBUG)
-                Console.WriteLine("[Client] Found {0} Kinects", KinectSensor.KinectSensors.Count);
-#endif
+//#if (DEBUG)
+//                Console.WriteLine("[Client] Found {0} Kinects", KinectSensor.KinectSensors.Count);
+//#endif
 
                 // Start the Kinect
                 initKinect();
