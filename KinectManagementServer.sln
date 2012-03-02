@@ -5,20 +5,28 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinectManagementServer", "K
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KinectClient", "KinectClient\KinectClient.csproj", "{5AD18358-BCE0-4643-BE6F-FEC1821B6827}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestureModule", "GestureModule\GestureModule.csproj", "{5DA17A6D-2594-411D-8F36-6A0685A7E716}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestureModuleProject", "GestureModule\GestureModuleProject.csproj", "{5DA17A6D-2594-411D-8F36-6A0685A7E716}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocketServer", "SocketServer\SocketServer.csproj", "{6561DA36-4111-4A95-896A-22EF154235C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{854B3F4B-33EC-4366-8372-E838FA337223}"
 	ProjectSection(SolutionItems) = preProject
+		KinectManagementServer.vsmdi = KinectManagementServer.vsmdi
+		Local.testsettings = Local.testsettings
 		README = README
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Design", "Design", "{3142B36D-F437-49C9-8386-FFC19DBE781D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{9853DEA4-DEED-4A1E-AF05-02212FF94196}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KMSTestSuite", "KMSTestSuite\KMSTestSuite.csproj", "{FEFCEE60-A847-4790-877F-21C0D51E40E9}"
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = KinectManagementServer.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
@@ -78,6 +86,16 @@ Global
 		{9853DEA4-DEED-4A1E-AF05-02212FF94196}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{9853DEA4-DEED-4A1E-AF05-02212FF94196}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{9853DEA4-DEED-4A1E-AF05-02212FF94196}.Release|x86.ActiveCfg = Release|Any CPU
+		{FEFCEE60-A847-4790-877F-21C0D51E40E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEFCEE60-A847-4790-877F-21C0D51E40E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEFCEE60-A847-4790-877F-21C0D51E40E9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{FEFCEE60-A847-4790-877F-21C0D51E40E9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{FEFCEE60-A847-4790-877F-21C0D51E40E9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FEFCEE60-A847-4790-877F-21C0D51E40E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEFCEE60-A847-4790-877F-21C0D51E40E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEFCEE60-A847-4790-877F-21C0D51E40E9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{FEFCEE60-A847-4790-877F-21C0D51E40E9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{FEFCEE60-A847-4790-877F-21C0D51E40E9}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
