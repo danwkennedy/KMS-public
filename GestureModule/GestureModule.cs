@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
- using System.Runtime.InteropServices;
-
+using System.Runtime.InteropServices;
 using Microsoft.Kinect;
 using System.IO;
 using Utils;
@@ -16,7 +14,7 @@ namespace GestureModule
     {
         
         private List<PoseList> poses;
-        private PoseCrouch crouch;
+        //private PoseCrouch crouch;
         private PoseHandLeft handleft;
         private PoseHandRight handright;
         private PoseLeftHandUp lefthandup;
@@ -25,12 +23,10 @@ namespace GestureModule
         private PoseLeanRight leanright;
         private PoseLeanStop leanstop;
        
-        
-
         public GestureModule()
         {
             poses = new List<PoseList>();
-            this.crouch = new PoseCrouch();
+            //this.crouch = new PoseCrouch();
             this.handleft = new PoseHandLeft();
             this.handright = new PoseHandRight();
             this.lefthandup = new PoseLeftHandUp();
@@ -38,7 +34,7 @@ namespace GestureModule
             this.leanleft = new PoseLeanLeft();
             this.leanright = new PoseLeanRight();
             this.leanstop = new PoseLeanStop();
-            this.poses.Add(crouch);
+            //this.poses.Add(crouch);
             this.poses.Add(handleft);
             this.poses.Add(handright);
             this.poses.Add(lefthandup);
@@ -47,10 +43,6 @@ namespace GestureModule
             this.poses.Add(leanright);
             this.poses.Add(leanstop);
         }
-
-
-        
-        
 
         public List<GestureEvent> processPlayers(List<Player> playerList){
             List<GestureEvent> gestureEvents = new List<GestureEvent>();
@@ -70,11 +62,5 @@ namespace GestureModule
             return gestureEvents;
 
         }
-
-
-         
-
-        
-
     }
 }

@@ -11,12 +11,11 @@ namespace KinectClient
     class KinectClientSocket : KinectClient
     {
         public readonly Int32 PORT = 5300;
-        public readonly String IP = "192.168.2.2";
+        public readonly String IP = "192.168.2.3";
 
         BinaryFormatter binaryFormatter;
         TcpClient client;
         NetworkStream stream;
-
 
         public KinectClientSocket()
         {

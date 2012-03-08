@@ -30,15 +30,15 @@ namespace UnityInterface
         /// <param name="e">The list of Players to process</param>
         public delegate void MainCall(UnityModuleArgs e);
 
-        /// <summary>
-        /// The port to transmit to
-        /// </summary>
-        private readonly Int32 PORT = 5300;
+        ///// <summary>
+        ///// The port to transmit to
+        ///// </summary>
+        //private readonly Int32 PORT = 5300;
 
-        /// <summary>
-        /// The IP address to transmit to
-        /// </summary>
-        private readonly String IP = "localhost";
+        ///// <summary>
+        ///// The IP address to transmit to
+        ///// </summary>
+        //private readonly String IP = "192.168.2.3";
 
         /// <summary>
         /// Keeps track of the number of event frames
@@ -72,16 +72,17 @@ namespace UnityInterface
         {
             try
             {
-                clientSock = new TcpClient(IP, PORT);
-                Console.WriteLine("[Client] Starting socket stream");
+                Console.WriteLine("[TCP] Attempting to connect to: {0}:{1}", Properties.Settings.Default.UnityIP, Properties.Settings.Default.UnityPORT);
+                clientSock = new TcpClient(Properties.Settings.Default.UnityIP, Properties.Settings.Default.UnityPORT);
+                Console.WriteLine("[TCP] Starting socket stream");
                 NetworkStream netStream = clientSock.GetStream();
                 writer = new StreamWriter(netStream);
                 reader = new StreamReader(netStream);
-                Console.WriteLine("[Client] Stream opened");
+                Console.WriteLine("[TCP] Stream opened");
             }
             catch (Exception e)
             {
-                Console.WriteLine("[Client] Exception:\n    {0}\nTrace: {1}", e.Message, e.StackTrace);
+                Console.WriteLine("[TCP] Exception:\n    {0}\nTrace: {1}", e.Message, e.StackTrace);
                 while (true) ;
             }
         }

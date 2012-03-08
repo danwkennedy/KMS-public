@@ -10,7 +10,7 @@ namespace GestureModule
     class PoseLeftHandUp : PoseList
     {
 
-        string type = "LeftHandUp";
+        string type = "handUp";
        
         public GestureEvent checkPose(Player p1)
         {

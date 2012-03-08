@@ -55,6 +55,7 @@ namespace KinectManagementServer
         /// A dictionary mapping the KinectId (string) and the SkeletonId (int) to a player
         /// </summary>
         private Dictionary<string, Dictionary<int, Player>> players;
+        private int playerIndex = 0;
 
         private int gestureCount = 0;
         private List<GestureEvent> gestureEvents;
@@ -129,7 +130,6 @@ namespace KinectManagementServer
             unityInterface = unity.Worker;
             unityThread = new Thread(new ThreadStart(unity.ThreadProc));
             unityThread.Start();
-
         }
 
         #endregion
@@ -184,7 +184,7 @@ namespace KinectManagementServer
                 {
                     if (players.Count < (pipeThreads.Count * 2))
                     {
-                        AddPlayer(new Player(players.Count, e.KinectId, skeleton));
+                        AddPlayer(new Player(playerIndex++, e.KinectId, skeleton));
 #if(PLAYER_DEBUG)
                         Console.WriteLine("Adding new player");
 #endif
@@ -227,10 +227,10 @@ namespace KinectManagementServer
             {
 
 //#if (DEBUG)
-//                foreach (GestureEvent s in gestureEvents)
-//                {
-//                    Console.WriteLine("[Event] " + s.Type);
-//                }
+                foreach (GestureEvent s in gestureEvents)
+                {
+                    Console.WriteLine("[Event] " + s.Type);
+                }
 //#endif
                 //Console.WriteLine(unityThread.ThreadState);
                 unityInterface.Invoke(new UnityModuleArgs(gestureEvents));
@@ -252,6 +252,7 @@ namespace KinectManagementServer
         private void AddPlayer(Player p)
         {
             players[p.KinectId][p.Skeleton.TrackingId] = p;
+            gestureEvents.Add(new GestureEvent("addPlayer", p.PlayerId));
         }
 
         /// <summary>
@@ -269,6 +270,7 @@ namespace KinectManagementServer
 #if (DEBUG)
                     Console.WriteLine("[Client] Removing Player number {0}", players[KID][keys[i]].PlayerId);
 #endif
+                    gestureEvents.Add(new GestureEvent("removePlayer",  players[KID][keys[i]].PlayerId));
                     players[KID].Remove(keys[i]);
                 }
                 finally { }

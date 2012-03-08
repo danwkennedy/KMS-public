@@ -9,7 +9,7 @@ namespace GestureModule
 {
     class PoseHandRight : PoseList
     {
-        string type = "HandRight";
+        string type = "handRight";
 
         public GestureEvent checkPose(Player p1)
         {
