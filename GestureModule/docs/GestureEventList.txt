@@ -1,0 +1,26 @@
+## Fundamental Poses In Yuxin's Code Now
+
+Crouch		
+HandLeft	
+HandRight	
+leanLeft  	
+leanRight	
+LeftHandUp	
+RightHandUp	
+
+
+
+## Evan should ignore these in any tests, or Yuxin may not put them in the list of events (Agreement?)
+
+stopLean
+
+
+
+## Composite Poses That Need to Be Agreed On *** ???
+
+moveForward		This is a gesture
+lowJump			Gesture
+longJump		Gesture	
+highJump		Gesture
+special			Gesture 
+
