@@ -84,7 +84,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GestureThread.cs" />
+    <Compile Include="GestureThread.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="KinectManagementServer.cs" />
     <Compile Include="PipeServer.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -101,9 +103,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GestureModule\GestureModuleProject.csproj">
+    <ProjectReference Include="..\GestureModule\GestureModule.csproj">
       <Project>{5DA17A6D-2594-411D-8F36-6A0685A7E716}</Project>
-      <Name>GestureModuleProject</Name>
+      <Name>GestureModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\SocketServer\UnityInterface.csproj">
       <Project>{6561DA36-4111-4A95-896A-22EF154235C4}</Project>
@@ -143,8 +145,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
-    <None Include="KinectManagementServer_TemporaryKey.pfx" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

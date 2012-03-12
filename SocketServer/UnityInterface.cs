@@ -83,7 +83,8 @@ namespace UnityInterface
             catch (Exception e)
             {
                 Console.WriteLine("[TCP] Exception:\n    {0}\nTrace: {1}", e.Message, e.StackTrace);
-                while (true) ;
+                while (true)
+                    ;
             }
         }
 
@@ -141,7 +142,7 @@ namespace UnityInterface
             {
                 return "";
             }
-            
+
         }
 
         /// <summary>

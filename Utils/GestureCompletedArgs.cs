@@ -15,7 +15,7 @@ namespace Utils
             events = _events;
         }
 
-        #region Getters/Setters
+        #region Properties
 
         public List<GestureEvent> Events
         {

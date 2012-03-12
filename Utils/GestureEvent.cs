@@ -7,63 +7,58 @@ namespace Utils
 {
     public class GestureEvent
     {
-        private string type;
-        private int player;
-        private int timestamp;
 
-        public GestureEvent(string _type, int _player)
+        /// <summary>
+        /// Empty constructor
+        /// </summary>
+        /// <param name="type">The type of event fired</param>
+        /// <param name="player">The number of the player who fired the event</param>
+        public GestureEvent(string type, int player)
         {
-            type = _type;
-            player = _player;
+            Type = type;
+            Player = player;
         }
 
 
-        #region Getters / Setters
+        #region Properties
 
+        /// <summary>
+        /// The event name
+        /// </summary>
         public string Type
         {
-            get
-            {
-                return type;
-            }
-            set
-            {
-                this.type = value;
-            }
+            get;
+            set;
         }
 
+        /// <summary>
+        /// The number of the player who fired the event
+        /// </summary>
         public int Player
         {
-            get
-            {
-                return player;
-            }
-            set
-            {
-                this.player = value;
-            }
+            get;
+            set;
         }
 
+        /// <summary>
+        /// The frame number when the event was fired
+        /// </summary>
         public int Timestamp
         {
-            get
-            {
-                return timestamp;
-            }
-            set
-            {
-                this.timestamp = value;
-            }
+            get;
+            set;
         }
 
         #endregion
+
         /// <summary>
-        /// Formats a GestureEvent in JSON: {"type":"handLeft","player":"1","timestamp":"123"}
+        /// Formats a GestureEvent into Json
+        /// Format example: {"type":"[type:string]","player":"[player number: int]","timestamp":"[]"}
         /// </summary>
         /// <returns>JSON String</returns>
         override public string ToString()
         {
-            return "{\"type\":\""+type+"\",\"player\":\""+player+"\",\"timestamp\":\""+timestamp+"\"}";
+            return "{\"type\":\"" + Type + "\",\"player\":\"" + Player + "\",\"timestamp\":\"" + Timestamp + "\"}";
         }
     }
 }

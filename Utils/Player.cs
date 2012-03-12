@@ -8,52 +8,48 @@ namespace Utils
 {
     public class Player
     {
-        private String kinectId;
 
-        private int playerId;
-        private Skeleton skeleton;
-
-        public Player(int id, string KID, Skeleton s)
+        /// <summary>
+        /// A holder class for a Player.
+        /// Stores the Player's associated KinectId and Skeleton as well as the Player number.
+        /// </summary>
+        /// <param name="playerId"></param>
+        /// <param name="kinectId"></param>
+        /// <param name="skeleton"></param>
+        public Player(int playerId, string kinectId, Skeleton skeleton)
         {
-            playerId = id;
-            kinectId = KID;
-            skeleton = s;
+            PlayerId = playerId;
+            KinectId = kinectId;
+            Skeleton = skeleton;
         }
 
-        #region Getters/Setters
+        #region Properties
 
+        /// <summary>
+        /// The unique Identifier for the Kinect the Player is using.
+        /// </summary>
         public String KinectId
         {
-            get
-            {
-                return this.kinectId;
-            }
-
-            set
-            {
-                this.kinectId = value;
-            }
+            get;
+            set;
         }
 
+        /// <summary>
+        /// The unique Identifier for the Player
+        /// </summary>
         public int PlayerId
         {
-            get
-            {
-                return this.playerId;
-            }
+            get;
+            private set;
         }
 
+        /// <summary>
+        /// The skeleton representation of the Player
+        /// </summary>
         public Skeleton Skeleton
         {
-            get
-            {
-                return this.skeleton;
-            }
-
-            set
-            {
-                this.skeleton = value;
-            }
+            get;
+            set;
         }
 
         #endregion

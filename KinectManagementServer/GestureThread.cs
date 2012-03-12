@@ -29,7 +29,7 @@ namespace KinectManagementServer
         /// <summary>
         /// An instance of the GestureModule
         /// </summary>
-        private GestureModule.GestureModuleClass gestureModule;
+        private GestureModule.GestureModule gestureModule;
 
         /// <summary>
         /// A callback method to be called after processing Player data
@@ -62,7 +62,7 @@ namespace KinectManagementServer
         /// </summary>
         private void InitializeGestureModule()
         {
-            gestureModule = new GestureModule.GestureModuleClass();
+            gestureModule = new GestureModule.GestureModule();
         }
 
         #endregion

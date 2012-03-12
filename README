@@ -76,3 +76,7 @@ Changelog:
 02/28/2012: Yuxin Ma
 	- Made a temporary hack to PoseRightHandUp changed message to "handup" to help demo
 	- Made PoseLeanRight PoseLeanLeft PoseLeanStop classes 
+
+03/11/2012: Daniel Kennedy
+    - Refactored the KMS code to make use of properties
+    - Fixed player management
