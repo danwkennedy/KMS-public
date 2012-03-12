@@ -1,0 +1,34 @@
+## About:
+	This document defines the poses that will not only be detected, but also sent returned to the game.
+
+
+## Interface with Unity -- These Should be the Poses that are returned to Unity (Need Agreement)
+Note: These match up with the presentation from design students....  This decision will affect test granularity, etc...
+
+	leanRight
+	leanLeft
+	moveForward		
+	rightWallRun	
+	leftWallRun		
+	Crouch
+	lowJump
+	longJump
+	highJump
+	special
+
+
+## In Yuxin's Code Now
+	Crouch		
+	HandLeft	
+	HandRight	
+	leanLeft  	
+	leanRight	
+	LeftHandUp	
+	RightHandUp	
+
+
+
+## Evan should ignore these in any tests, or Yuxin may not put them in the list of events (Agreement?)
+	stopLean
+
+
