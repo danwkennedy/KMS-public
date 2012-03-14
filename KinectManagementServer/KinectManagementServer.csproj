@@ -103,7 +103,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GestureModule\GestureModule.csproj">
+    <ProjectReference Include="..\GestureModule\GestureModuleProject.csproj">
       <Project>{5DA17A6D-2594-411D-8F36-6A0685A7E716}</Project>
       <Name>GestureModule</Name>
     </ProjectReference>

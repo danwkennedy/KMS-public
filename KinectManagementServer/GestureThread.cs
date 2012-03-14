@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Utils;
-using GestureModule;
+using GestureModuleProject;
 using System.Runtime.CompilerServices;
 using KinectManagementServer;
 
@@ -29,7 +29,7 @@ namespace KinectManagementServer
         /// <summary>
         /// An instance of the GestureModule
         /// </summary>
-        private GestureModule.GestureModule gestureModule;
+        private GestureModuleProject.GestureModule gestureModule;
 
         /// <summary>
         /// A callback method to be called after processing Player data
@@ -62,7 +62,7 @@ namespace KinectManagementServer
         /// </summary>
         private void InitializeGestureModule()
         {
-            gestureModule = new GestureModule.GestureModule();
+            gestureModule = new GestureModuleProject.GestureModule();
         }
 
         #endregion

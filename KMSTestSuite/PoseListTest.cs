@@ -1,4 +1,4 @@
-﻿using GestureModule;
+﻿using GestureModuleProject;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Utils;
@@ -7,6 +7,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Kinect;
 using System.Collections.Generic;
+using GestureModuleProject;
 
 namespace KMSTestSuite
 {
@@ -69,45 +70,9 @@ namespace KMSTestSuite
         //
         #endregion
 
-
-        internal virtual PoseList CreatePoseHandLeft(GestureModuleClass par)
+        internal virtual GestureModule CreateGestureModule()
         {
-            // TODO: Instantiate an appropriate concrete class.
-            PoseList target = new PoseHandLeft(par) ;
-            return target;
-        }
-
-        internal virtual PoseList CreatePoseHandRight(GestureModuleClass par)
-        {
-            // TODO: Instantiate an appropriate concrete class.
-            PoseList target = new PoseHandLeft(par);
-            return target;
-        }
-
-        internal virtual PoseList CreatePoseLeftHandUp(GestureModuleClass par)
-        {
-            // TODO: Instantiate an appropriate concrete class.
-            PoseList target = new PoseHandLeft(par);
-            return target;
-        }
-
-        internal virtual PoseList CreatePoseRightHandUp(GestureModuleClass par)
-        {
-            // TODO: Instantiate an appropriate concrete class.
-            PoseList target = new PoseHandLeft(par);
-            return target;
-        }
-
-        internal virtual PoseList CreatePoseCrouch(GestureModuleClass par)
-        {
-            // TODO: Instantiate an appropriate concrete class.
-            PoseList target = new PoseHandLeft(par);
-            return target;
-        }
-
-        internal virtual GestureModuleClass CreateGestureModule()
-        {
-            GestureModuleClass target = new GestureModuleClass();
+            GestureModule target = new GestureModule();
             return target;
         }
 
@@ -118,18 +83,12 @@ namespace KMSTestSuite
         public void checkPoseTest()
         {
             //import serialized skeleton data here //
-            GestureModuleClass parent = CreateGestureModule();
+            GestureModule parent = CreateGestureModule();
 
             NewSkeletonCollectionHelper skeletonHelper;
-            LinkedList<string> detectedPoses;
+            LinkedList<List<GestureEvent>> expectedPoses;
+            LinkedList<List<GestureEvent>> detectedPoses;
 
-            //these are all the various poses.
-            PoseList handLeft = CreatePoseHandLeft(parent); // TODO: Initialize to an appropriate value
-            PoseList handRight = CreatePoseHandRight(parent);
-            PoseList leftHandUp = CreatePoseLeftHandUp(parent);
-            PoseList rightHandUp = CreatePoseRightHandUp(parent);
-            PoseList crouch = CreatePoseCrouch(parent);
-            //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
             string[] files = Directory.GetFiles(@"C:\Users\Evan\KMS\KMSTestSuite\TestPoses");
 
@@ -146,95 +105,32 @@ namespace KMSTestSuite
                 }
 
                 // Assert.IsNotNull(skeletonHelper);
-                detectedPoses = skeletonHelper.ExpectedPoses;
+                expectedPoses = skeletonHelper.ExpectedPoses;
+                detectedPoses = new LinkedList<List<GestureEvent>>();
 
 
                 Player p1 = null; // TODO: Initialize to an appropriate value
                 string lastPose = null; // TODO: Initialize to an appropriate value
 
                 p1 = new Player(4, "testplayer", skeletonHelper.Skeletons[0]);
+                List<Player> playerList = new List<Player>();
+                playerList.Add(p1);
 
                 foreach (Skeleton skal in skeletonHelper.Skeletons)
                 {
                     p1.Skeleton = skal;
-                    //each pose is its own class, so unfortunately, we have to do each in turn and can't do
-                    //anything nifty with generics or a foreach loop
-                    //crouch
-                    if (crouch.checkPose(p1))
-                    {
-                        if (lastPose!= null && lastPose.Equals("PoseCrouch"))
-                        {
-                            continue;
-                        }
-                        detectedPoses.AddLast("PoseCrouch");
-                        lastPose = "PoseCrouch";
-                        continue;
-                    }
-
-                    //rightHandUp
-                    if (rightHandUp.checkPose(p1))
-                    {
-                        if (lastPose != null && lastPose.Equals("PoseHandRightUp"))
-                        {
-                            continue;
-                        }
-                        detectedPoses.AddLast("PoseHandRightUp");
-                        lastPose = "PoseHandRightUp";
-                        continue;
-                    }
-
-
-                    //leftHandUp
-                    if (leftHandUp.checkPose(p1))
-                    {
-                        if (lastPose != null && lastPose.Equals("PoseHandLeftUp"))
-                        {
-                            continue;
-                        }
-                        detectedPoses.AddLast("PoseHandLeftUp");
-                        lastPose = "PoseHandLeftUp";
-                        continue;
-                    }
-
-                    //leftHandOut
-                    if (handLeft.checkPose(p1))
-                    {
-                        if (lastPose != null && lastPose.Equals("PoseHandLeftOut"))
-                        {
-                            continue;
-                        }
-                        detectedPoses.AddLast("PoseHandLeftOut");
-                        lastPose = "PoseHandLeftOut";
-                        continue;
-                    }
-
-                    //rightHandOut
-                    if (handRight.checkPose(p1))
-                    {
-                        if (lastPose != null && lastPose.Equals("PoseHandRightOut"))
-                        {
-                            continue;
-                        }
-                        detectedPoses.AddLast("PoseHandRightOut");
-                        lastPose = "PoseHandRightOut";
-                        continue;
-                    }
-
-                    lastPose = null;
+                    List<GestureEvent> results = parent.processPlayers(playerList);
+                    detectedPoses.AddLast(results);
 
                 }
 
                 if (skeletonHelper.ExpectedPoses.Count != detectedPoses.Count) Assert.Fail("expected pose count not equal to actual pose count");
 
-                string[] skelStrings = new string[detectedPoses.Count];
-                string[] actStrings = new string[detectedPoses.Count];
-
-                detectedPoses.CopyTo(actStrings, 0);
-                skeletonHelper.ExpectedPoses.CopyTo(skelStrings, 0);
-
+               
+                //this 'for' block fixed pending further confirmation of relevant data structure.
                 for (int i = 0; i < detectedPoses.Count; i++)
                 {
-                    if (!skelStrings[i].Equals(actStrings[i])) Assert.Fail("actual pose different from expected pose");
+                    if (expectedPoses.[i].Equals(actStrings[i])) Assert.Fail("actual pose different from expected pose");
                 }
                 Assert.AreEqual(detectedPoses, skeletonHelper.ExpectedPoses);
                 detectedPoses.Clear();
