@@ -8,7 +8,7 @@ using System.IO;
 using Utils;
 
 
-namespace GestureModule
+namespace GestureModuleProject
 {
     public class GestureModule
     {

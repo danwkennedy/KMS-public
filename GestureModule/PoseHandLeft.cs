@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Kinect;
 using Utils;
 
-namespace GestureModule
+namespace GestureModuleProject
 {
     class PoseHandLeft : PoseList
     {
