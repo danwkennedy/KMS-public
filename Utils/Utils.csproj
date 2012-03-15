@@ -66,6 +66,7 @@
     <Compile Include="GestureModuleArgs.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerUpdateArgs.cs" />
     <Compile Include="SkeletonUpdateArgs.cs" />
     <Compile Include="UnityModuleArgs.cs" />
   </ItemGroup>

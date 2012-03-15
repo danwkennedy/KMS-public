@@ -37,7 +37,11 @@ namespace KinectManagementServer
         /// <param name="e">The update args with the list of new GestureEvents to be sent to the Unity Interface</param>
         public delegate void OnCompleted(GestureCompletedArgs e);
 
-
+        /// <summary>
+        /// A delegate method to allow for the Unity Interface to update the state
+        /// </summary>
+        /// <param name="e">State args</param>
+        public delegate void UpdateState(ServerUpdateArgs e);
 
         #endregion
 
@@ -181,7 +185,6 @@ namespace KinectManagementServer
             pipes = new List<PipeServer>();
 
             gestureThreads = new List<Thread>();
-            //gestures = new List<GestureThread>();
             gestureModules = new Dictionary<string, GestureThread.MainCall>();
 
             players = new Dictionary<string, Dictionary<int, Player>>();
@@ -218,13 +221,17 @@ namespace KinectManagementServer
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void SkeletonUpdate(SkeletonUpdateArgs e)
         {
-            // Check to see that the number of skeletons has gone down
-            if (e.Skeletons.Count < players[e.KinectId].Values.Count && e.Skeletons.Count == 1)
+
+            // Check to see if we have gone from 2 players to 1 player on this Kinect
+            bool missingPlayer = e.Skeletons.Count < players[e.KinectId].Values.Count && e.Skeletons.Count == 1;
+
+            // If we have a missing player, remove him and free his PlayerId for the next drop-in
+            if (missingPlayer)
             {
-                // If so, find the missing player and remove it
+                // TODO: refactor this to work a little better
                 Player[] playerArray = players[e.KinectId].Values.ToArray<Player>();
-                
-                for (int i = 0; i < playerArray.Length; i++ )
+
+                for (int i = 0; i < playerArray.Length; i++)
                 {
                     if (playerArray[i].Skeleton.TrackingId != e.Skeletons[0].TrackingId)
                     {

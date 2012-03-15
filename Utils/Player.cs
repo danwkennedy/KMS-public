@@ -6,7 +6,7 @@ using Microsoft.Kinect;
 
 namespace Utils
 {
-    public class Player
+    public class Player : IEquatable<Player>
     {
 
         /// <summary>
@@ -54,5 +54,14 @@ namespace Utils
 
         #endregion
 
+        #region IEquatable<Player> Members
+
+        public bool Equals(Player other)
+        {
+            // Two players can be identified as the same if their KinectId and Skeleton TrackingId are the same
+            return KinectId.Equals(other.KinectId) && Skeleton.TrackingId == other.Skeleton.TrackingId;
+        }
+
+        #endregion
     }
 }
