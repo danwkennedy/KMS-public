@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Utils
 {
+    [Serializable()] 
     public class GestureEvent
     {
 
@@ -18,7 +19,6 @@ namespace Utils
             Type = type;
             Player = player;
         }
-
 
         #region Properties
 
