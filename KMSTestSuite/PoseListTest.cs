@@ -84,7 +84,7 @@ namespace KMSTestSuite
             //import serialized skeleton data here //
             GestureModule parent = CreateGestureModule();
 
-            NewSkeletonCollectionHelper skeletonHelper;
+            SkeletonCollectionHelper skeletonHelper;
             List<List<GestureEvent>> expectedPoses;
             List<List<GestureEvent>> detectedPoses;
 
@@ -97,20 +97,18 @@ namespace KMSTestSuite
                 {
 
                     BinaryFormatter binFormatter = new BinaryFormatter();
-                    skeletonHelper = (NewSkeletonCollectionHelper)binFormatter.Deserialize(fs);
+                    skeletonHelper = (SkeletonCollectionHelper)binFormatter.Deserialize(fs);
 
                     fs.Flush();
                     fs.Close();
                 }
 
                 // Assert.IsNotNull(skeletonHelper);
-                expectedPoses = skeletonHelper.ExpectedPoses;
+                expectedPoses = (List<List<GestureEvent>>) skeletonHelper.ExpectedPoses;
                 detectedPoses = new List<List<GestureEvent>>();
 
 
-                Player p1 = null; // TODO: Initialize to an appropriate value
-                string lastPose = null; // TODO: Initialize to an appropriate value
-
+                Player p1 = null;
                 p1 = new Player(4, "testplayer", skeletonHelper.Skeletons[0]);
                 List<Player> playerList = new List<Player>();
                 playerList.Add(p1);
@@ -123,9 +121,8 @@ namespace KMSTestSuite
 
                 }
 
-                if (skeletonHelper.ExpectedPoses.Count != detectedPoses.Count) Assert.Fail("expected pose count not equal to actual pose count");
+                if (((List<List<GestureEvent>>) skeletonHelper.ExpectedPoses).Count != detectedPoses.Count) Assert.Fail("expected pose count not equal to actual pose count");
 
-               
                 //this 'for' block fixed pending further confirmation of relevant data structure.
                 foreach (List<GestureEvent> result in detectedPoses)
                 {
