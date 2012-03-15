@@ -13,6 +13,7 @@ namespace Utils
         /// </summary>
         /// <param name="type">The type of event fired</param>
         /// <param name="player">The number of the player who fired the event</param>
+        [Serializable()] 
         public GestureEvent(string type, int player)
         {
             Type = type;
