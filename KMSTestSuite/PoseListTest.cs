@@ -2,12 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using Utils;
-using TestFrameworkUtils;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Kinect;
 using System.Collections.Generic;
-using GestureModuleProject;
+using TestFrameworkUtils;
 
 namespace KMSTestSuite
 {
@@ -86,8 +85,8 @@ namespace KMSTestSuite
             GestureModule parent = CreateGestureModule();
 
             NewSkeletonCollectionHelper skeletonHelper;
-            LinkedList<List<GestureEvent>> expectedPoses;
-            LinkedList<List<GestureEvent>> detectedPoses;
+            List<List<GestureEvent>> expectedPoses;
+            List<List<GestureEvent>> detectedPoses;
 
 
             string[] files = Directory.GetFiles(@"C:\Users\Evan\KMS\KMSTestSuite\TestPoses");
@@ -106,7 +105,7 @@ namespace KMSTestSuite
 
                 // Assert.IsNotNull(skeletonHelper);
                 expectedPoses = skeletonHelper.ExpectedPoses;
-                detectedPoses = new LinkedList<List<GestureEvent>>();
+                detectedPoses = new List<List<GestureEvent>>();
 
 
                 Player p1 = null; // TODO: Initialize to an appropriate value
@@ -120,7 +119,7 @@ namespace KMSTestSuite
                 {
                     p1.Skeleton = skal;
                     List<GestureEvent> results = parent.processPlayers(playerList);
-                    detectedPoses.AddLast(results);
+                    detectedPoses.Add(results);
 
                 }
 
@@ -128,9 +127,19 @@ namespace KMSTestSuite
 
                
                 //this 'for' block fixed pending further confirmation of relevant data structure.
-                for (int i = 0; i < detectedPoses.Count; i++)
+                foreach (List<GestureEvent> result in detectedPoses)
                 {
-                    if (expectedPoses.[i].Equals(actStrings[i])) Assert.Fail("actual pose different from expected pose");
+                    foreach (List<GestureEvent> predicted in expectedPoses)
+                    {
+                        if (result.Count == predicted.Count)
+                        {
+                            if (result[0].Type.Equals(predicted[0].Type))
+                            {
+                                continue;
+                            }
+                        }
+                        Assert.Fail("Expected poselist length not equal to detected pose list length.");
+                    }
                 }
                 Assert.AreEqual(detectedPoses, skeletonHelper.ExpectedPoses);
                 detectedPoses.Clear();

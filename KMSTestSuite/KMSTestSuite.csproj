@@ -45,8 +45,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="TestFrameworkUtils">
-      <HintPath>..\..\Downloads\skeletondata\skeletondata\TestFrameworkUtils.dll</HintPath>
+    <Reference Include="TestFrameworkUtils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\TestFrameworkUtils.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
