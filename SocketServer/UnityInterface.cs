@@ -60,6 +60,8 @@ namespace UnityInterface
         /// </summary>
         StreamReader reader;
 
+        NetworkStream netStream;
+
         #endregion
 
         #region Init
@@ -75,7 +77,7 @@ namespace UnityInterface
                 Console.WriteLine("[TCP] Attempting to connect to: {0}:{1}", Properties.Settings.Default.UnityIP, Properties.Settings.Default.UnityPORT);
                 clientSock = new TcpClient(Properties.Settings.Default.UnityIP, Properties.Settings.Default.UnityPORT);
                 Console.WriteLine("[TCP] Starting socket stream");
-                NetworkStream netStream = clientSock.GetStream();
+                netStream = clientSock.GetStream();
                 writer = new StreamWriter(netStream);
                 reader = new StreamReader(netStream);
                 Console.WriteLine("[TCP] Stream opened");
@@ -108,7 +110,13 @@ namespace UnityInterface
         /// </summary>
         private void Wait()
         {
-            while (clientSock.Connected) ;
+            while (clientSock.Connected)
+            {
+                if (!reader.EndOfStream)
+                {
+                    Console.WriteLine("Socket stream changed!");
+                }
+            }
         }
 
         #endregion

@@ -12,7 +12,6 @@ using GestureModuleProject;
 namespace KMSTestSuite
 {
     
-    
     /// <summary>
     ///This is a test class for PoseListTest and is intended
     ///to contain all PoseListTest Unit Tests

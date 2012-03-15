@@ -37,6 +37,8 @@ namespace KinectManagementServer
         /// <param name="e">The update args with the list of new GestureEvents to be sent to the Unity Interface</param>
         public delegate void OnCompleted(GestureCompletedArgs e);
 
+
+
         #endregion
 
         #region Vars
