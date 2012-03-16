@@ -45,8 +45,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="TestFrameworkUtils">
-      <HintPath>..\..\Downloads\skeletondata\skeletondata\TestFrameworkUtils.dll</HintPath>
+    <Reference Include="TestFrameworkUtils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\TestFrameworkUtils.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -69,13 +70,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="TestPoses\EverythingInOrder.bin" />
-    <None Include="TestPoses\EverythingRandom.bin" />
-    <None Include="TestPoses\PoseCrouch.bin" />
-    <None Include="TestPoses\PoseHandLeftOut.bin" />
-    <None Include="TestPoses\PoseHandLeftUp.bin" />
-    <None Include="TestPoses\PoseHandRightOut.bin" />
-    <None Include="TestPoses\PoseHandRightUp.bin" />
+    <None Include="TestPoses\simpleposesbin1.bin" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

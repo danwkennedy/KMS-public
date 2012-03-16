@@ -33,7 +33,6 @@ namespace Utils
             Player = player;
             Code = code;
         }
-
         #region Properties
 
         /// <summary>
