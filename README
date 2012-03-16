@@ -80,3 +80,6 @@ Changelog:
 03/11/2012: Daniel Kennedy
     - Refactored the KMS code to make use of properties
     - Fixed player management
+
+03/15/2012: Daniel Kennedy
+    - Pushing Yuxin's updated Gesture Module.

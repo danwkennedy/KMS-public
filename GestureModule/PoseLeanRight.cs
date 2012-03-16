@@ -10,7 +10,8 @@ namespace GestureModuleProject
     class PoseLeanRight : PoseList
     {
 
-        string type = "leanRight";
+        string type = "LeanRight";
+        static int gestureCode = 6;
 
         public GestureEvent checkPose(Player p1)
         {
@@ -18,10 +19,13 @@ namespace GestureModuleProject
             //LeanRight
             if (p1.Skeleton.Joints[JointType.ShoulderCenter].Position.X - p1.Skeleton.Joints[JointType.HipCenter].Position.X > .1f)
             {
-                return new GestureEvent(type, p1.PlayerId);
+                return new GestureEvent(type, p1.PlayerId, gestureCode);
             }
+            else
+            {
+                return new GestureEvent(type, p1.PlayerId, -gestureCode);
 
-            return null;
+            }
         }
 
     }

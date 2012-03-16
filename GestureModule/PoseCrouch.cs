@@ -10,16 +10,21 @@ namespace GestureModuleProject
     class PoseCrouch: PoseList
     {
         string type = "Crouch";
+        static int gestureCode = 7;
         
         public GestureEvent checkPose(Player p1)
         {
             //Crouching Logic
-            if (p1.Skeleton.Joints[JointType.Head].Position.Y < 0.5f && p1.Skeleton.Joints[JointType.Head].Position.Y > 0.2f)
+            if (Math.Abs(p1.Skeleton.Joints[JointType.Head].Position.Y - p1.Skeleton.Joints[JointType.KneeLeft].Position.Y) < 0.5f)
             {
-                return new GestureEvent(type, p1.PlayerId);
+                return new GestureEvent(type, p1.PlayerId, gestureCode);
+            }
+            else
+            {
+                return new GestureEvent(type, p1.PlayerId, -gestureCode);
             }
 
-            return null;
+            
         }
     }
 }

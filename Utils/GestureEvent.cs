@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Utils
 {
+    [Serializable()] 
     public class GestureEvent
     {
 
@@ -17,8 +18,21 @@ namespace Utils
         {
             Type = type;
             Player = player;
+          
         }
 
+        /// <summary>
+        /// Second constructor that takes code as one of the params
+        /// </summary>
+        /// <param name="type">The type of event fired</param>
+        /// <param name="player">The number of the player</param>
+        /// <param name="code">The code for the event</param>
+        public GestureEvent(string type, int player, int code)
+        {
+            Type = type;
+            Player = player;
+            Code = code;
+        }
 
         #region Properties
 
@@ -44,6 +58,15 @@ namespace Utils
         /// The frame number when the event was fired
         /// </summary>
         public int Timestamp
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// The code that represent the gesture
+        /// </summary>
+        public int Code
         {
             get;
             set;

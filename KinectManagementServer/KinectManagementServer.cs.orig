@@ -37,11 +37,15 @@ namespace KinectManagementServer
         /// <param name="e">The update args with the list of new GestureEvents to be sent to the Unity Interface</param>
         public delegate void OnCompleted(GestureCompletedArgs e);
 
+<<<<<<< Updated upstream
+
+=======
         /// <summary>
         /// A delegate method to allow for the Unity Interface to update the state
         /// </summary>
         /// <param name="e">State args</param>
-        //public delegate void UpdateState(ServerUpdateArgs e);
+        public delegate void UpdateState(ServerUpdateArgs e);
+>>>>>>> Stashed changes
 
         #endregion
 
@@ -322,7 +326,7 @@ namespace KinectManagementServer
         {
             Player p = new Player(playerIndices.Pop(), KID, skeleton);
             players[p.KinectId][p.Skeleton.TrackingId] = p;
-            gestureEvents.Add(new GestureEvent("AddPlayer", p.PlayerId));
+            gestureEvents.Add(new GestureEvent("addPlayer", p.PlayerId));
 
             #if(DEBUG)
                         Console.WriteLine("Adding Player{0}", p.PlayerId);
@@ -337,7 +341,7 @@ namespace KinectManagementServer
         {
             players[p.KinectId].Remove(p.Skeleton.TrackingId);
             playerIndices.Push(p.PlayerId);
-            gestureEvents.Add(new GestureEvent("RemovePlayer", p.PlayerId));
+            gestureEvents.Add(new GestureEvent("removePlayer", p.PlayerId));
 
             #if(DEBUG)
                         Console.WriteLine("Removing player{0}", p.PlayerId);
@@ -362,7 +366,7 @@ namespace KinectManagementServer
 #endif
 
                 playerIndices.Push(players[KID][keys[i]].PlayerId);
-                gestureEvents.Add(new GestureEvent("RemovePlayer", players[KID][keys[i]].PlayerId));
+                gestureEvents.Add(new GestureEvent("removePlayer", players[KID][keys[i]].PlayerId));
 
                 players[KID].Remove(keys[i]);
             }

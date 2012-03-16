@@ -7,7 +7,7 @@ namespace Utils
 {
     public struct ServerUpdateArgs
     {
-        private string 
+        //private 
 
 
     }

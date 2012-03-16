@@ -10,17 +10,21 @@ namespace GestureModuleProject
     class PoseRightHandUp : PoseList
     {
 
-        string type = "handUp";
+        string type = "HandUp";
+        static int gestureCode = 4;
 
         public GestureEvent checkPose(Player p1)
         {
             //RightHandUp
             if (p1.Skeleton.Joints[JointType.HandRight].Position.Y - p1.Skeleton.Joints[JointType.Head].Position.Y > 0.1f)
             {
-                return new GestureEvent(type, p1.PlayerId);
+                return new GestureEvent(type, p1.PlayerId, gestureCode);
             }
+            else
+            {
+                return new GestureEvent(type, p1.PlayerId, -gestureCode);
 
-            return null;
+            }
         }
     }
 }

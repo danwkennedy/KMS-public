@@ -10,6 +10,7 @@ namespace GestureModuleProject
     class PoseLeanStop : PoseList
     {
         string type = "stopLean";
+        static int code = 12;
 
         public GestureEvent checkPose(Player p1)
         {
@@ -17,7 +18,7 @@ namespace GestureModuleProject
             //LeanRight
             if (p1.Skeleton.Joints[JointType.ShoulderCenter].Position.X - p1.Skeleton.Joints[JointType.HipCenter].Position.X > -0.1f && p1.Skeleton.Joints[JointType.ShoulderCenter].Position.X - p1.Skeleton.Joints[JointType.HipCenter].Position.X < 0.1f)
             {
-                return new GestureEvent(type, p1.PlayerId);
+                return new GestureEvent(type, p1.PlayerId, code);
             }
 
             return null;
