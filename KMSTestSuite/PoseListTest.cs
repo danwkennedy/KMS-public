@@ -121,7 +121,7 @@ namespace KMSTestSuite
 
                 }
 
-                if (((List<List<GestureEvent>>) skeletonHelper.ExpectedPoses).Count != detectedPoses.Count) Assert.Fail("expected pose count not equal to actual pose count");
+                if (expectedPoses.Count != detectedPoses.Count) Assert.Fail("expected pose count not equal to actual pose count");
 
                 //this 'for' block fixed pending further confirmation of relevant data structure.
                 foreach (List<GestureEvent> result in detectedPoses)
@@ -134,6 +134,7 @@ namespace KMSTestSuite
                             {
                                 continue;
                             }
+                            Assert.Fail("result not equal to predicted");
                         }
                         Assert.Fail("Expected poselist length not equal to detected pose list length.");
                     }

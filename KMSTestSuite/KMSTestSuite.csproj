@@ -70,13 +70,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="TestPoses\EverythingInOrder.bin" />
-    <None Include="TestPoses\EverythingRandom.bin" />
-    <None Include="TestPoses\PoseCrouch.bin" />
-    <None Include="TestPoses\PoseHandLeftOut.bin" />
-    <None Include="TestPoses\PoseHandLeftUp.bin" />
-    <None Include="TestPoses\PoseHandRightOut.bin" />
-    <None Include="TestPoses\PoseHandRightUp.bin" />
+    <None Include="TestPoses\simpleposesbin1.bin" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
