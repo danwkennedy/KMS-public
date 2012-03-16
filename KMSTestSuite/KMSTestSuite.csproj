@@ -69,6 +69,7 @@
       <Name>Utils</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="TestPoses\simpleposesbin1.bin" />
   </ItemGroup>
