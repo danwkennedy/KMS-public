@@ -116,8 +116,10 @@ namespace KMSTestSuite
 
                 foreach (Skeleton skal in skeletonHelper.Skeletons)
                 {
+                    //iterates through the skeleton data, passing processing to the gestureModule on every frame (skeleton)
                     p1.Skeleton = skal;
                     List<GestureEvent> results = parent.processPlayers(playerList);
+                    //collection of the resultant gestureEvent lists
                     detectedPoses.Add(results);
 
                 }
